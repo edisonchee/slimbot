@@ -1,0 +1,29 @@
+{
+  "name": "telebot",
+  "version": "0.1.0",
+  "description": "Telegram Bot API for Node.js",
+  "author": "Edison Chee <edisonchee@live.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edisonchee/telebot.git"
+  },
+  "main": "index.js",
+  "keywords": [
+    "telegram",
+    "bot",
+    "api",
+    "node"
+  ],
+  "license": "MIT",
+  "scripts": {
+    "start": "pm2 start src/index.js --watch"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "bugs": {
+    "url": "https://github.com/edisonchee/telebot/issues"
+  },
+  "homepage": "https://github.com/edisonchee/telebot#readme"
+}
