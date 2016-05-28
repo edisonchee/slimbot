@@ -14,13 +14,21 @@
     "api",
     "node"
   ],
+  "engines": {
+    "node": "6.2.0"
+  },
   "license": "MIT",
   "scripts": {
     "start": "pm2 start src/index.js --watch"
   },
   "dependencies": {
+    "bluebird": "^3.4.0",
+    "eventemitter3": "^1.2.0",
+    "request-promise": "^3.0.0"
   },
   "devDependencies": {
+    "eslint": "^2.11.0",
+    "jasmine": "^2.4.1"
   },
   "bugs": {
     "url": "https://github.com/edisonchee/telebot/issues"
