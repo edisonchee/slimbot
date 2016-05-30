@@ -22,13 +22,15 @@ class Telebot extends EventEmitter {
       uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
       qs: {
         offset: this._offset + 1,
-        timeout: 2000
+        timeout: 10
       },
+      simple: false,
       resolveWithFullResponse: true,
       forever: true
     };
 
-    return Request(options).then(resp => {
+    return Request(options)
+    .then(resp => {
       if (resp.statusCode !== 200) {
         throw new Error('resp.statusCode' + 'resp.body}');
       };
@@ -39,29 +41,34 @@ class Telebot extends EventEmitter {
         updates.result.forEach(update => {
           this._offset = update.update_id;
         });
+        this.processUpdates(updates.result);
         return updates.result;
       };
+    })
+    .catch(error => {
+      throw error;
+    })
+    .finally(() => {
+      setTimeout(() => this.getUpdates(), 300);
     });
   }
 
-  processUpdates() {
-    this.getUpdates().then(updates => {
-      updates.forEach(update => {
-        let message = update.message;
-        let callbackQuery = update.callbackQuery;
-        let inlineQuery = update.inline_query;
-        let chosenInlineResult = update.chosen_inline_result;
+  processUpdates(updates) {
+    updates.forEach(update => {
+      let message = update.message;
+      let callbackQuery = update.callbackQuery;
+      let inlineQuery = update.inline_query;
+      let chosenInlineResult = update.chosen_inline_result;
 
-        if (message) {
-          this.emit('message', message);
-        } else if (callbackQuery) {
-          this.emit('callback_query', callbackQuery);
-        } else if (inlineQuery) {
-          this.emit('inline_query', inlineQuery);
-        } else if (chosenInlineResult) {
-          this.emit('chosen_inline_result', chosenInlineResult);
-        }
-      });
+      if (message) {
+        this.emit('message', message);
+      } else if (callbackQuery) {
+        this.emit('callback_query', callbackQuery);
+      } else if (inlineQuery) {
+        this.emit('inline_query', inlineQuery);
+      } else if (chosenInlineResult) {
+        this.emit('chosen_inline_result', chosenInlineResult);
+      }
     });
   }
 }
