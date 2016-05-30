@@ -60,6 +60,16 @@ class Telebot extends EventEmitter {
     this._request('getUpdates', params);
   }
 
+  sendMessage(chatId, text, params) {
+    if (chatId === undefined) {
+      throw 'chat_id is undefined';
+    } else if (text === undefined) {
+      throw 'please provide a message to send';
+    };
+
+    this._request('sendMessage', params)
+  }
+
   processUpdates(updates) {
     updates.forEach(update => {
       let message = update.message;
