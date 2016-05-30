@@ -21,7 +21,45 @@ class Telebot extends EventEmitter {
     return Request(options)
     .then(resp => {
       if (resp.statusCode !== 200) {
-        throw new Error('resp.statusCode' + 'resp.body}');
+        throw new Error(resp.statusCode + ':\n'+ resp.body);
+      };
+
+      let updates = JSON.parse(resp.body);
+
+      if (updates.ok) {
+        return updates.result;
+      };
+    })
+    .catch(error => {
+      throw error;
+    });
+  }
+
+  getMe() {
+    let options = {
+      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
+      resolveWithFullResponse: true
+    };
+
+    return Request(options);
+  }
+
+  getUpdates() {
+    let options = {
+      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
+      qs: {
+        offset: this._offset + 1,
+        timeout: 10
+      },
+      simple: false,
+      resolveWithFullResponse: true,
+      forever: true
+    };
+
+    return Request(options)
+    .then(resp => {
+      if (resp.statusCode !== 200) {
+        throw new Error(resp.statusCode + ':\n'+ resp.body);
       };
 
       let updates = JSON.parse(resp.body);
@@ -42,30 +80,19 @@ class Telebot extends EventEmitter {
     });
   }
 
-  getMe() {
-    let options = {
-      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
-      resolveWithFullResponse: true
-    };
-
-    return Request(options);
-  }
-
-  getUpdates() {
-    let params = {
-      offset: this._offset + 1,
-      timeout: 10
-    };
-
-    this._request('getUpdates', params);
-  }
-
-  sendMessage(chatId, text, params) {
+  sendMessage(chatId, text, optionalParams) {
     if (chatId === undefined) {
       throw 'chat_id is undefined';
     } else if (text === undefined) {
       throw 'please provide a message to send';
     };
+
+    let params = {
+      chat_id: chatId,
+      text: text
+    };
+
+    Object.assign(params, optionalParams);
 
     this._request('sendMessage', params)
   }
