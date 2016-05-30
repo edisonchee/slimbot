@@ -8,22 +8,11 @@ class Telebot extends EventEmitter {
     this._offset = 0;
   }
 
-  getMe() {
-    let options = {
-      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
-      resolveWithFullResponse: true
-    };
+  _request(method, params) {
 
-    return Request(options);
-  }
-
-  getUpdates() {
     let options = {
-      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
-      qs: {
-        offset: this._offset + 1,
-        timeout: 10
-      },
+      uri: 'https://api.telegram.org/bot' + this._token + '/' + method,
+      qs: params,
       simple: false,
       resolveWithFullResponse: true,
       forever: true
@@ -51,6 +40,24 @@ class Telebot extends EventEmitter {
     .finally(() => {
       setTimeout(() => this.getUpdates(), 300);
     });
+  }
+
+  getMe() {
+    let options = {
+      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
+      resolveWithFullResponse: true
+    };
+
+    return Request(options);
+  }
+
+  getUpdates() {
+    let params = {
+      offset: this._offset + 1,
+      timeout: 10
+    };
+
+    this._request('getUpdates', params);
   }
 
   processUpdates(updates) {

@@ -1,4 +1,4 @@
-const Telebot = require('./telebot');
+const Telebot = require('../src/telebot');
 const telebot = new Telebot(process.env['TELEGRAM_TOKEN_2']);
 
 // Register listeners
