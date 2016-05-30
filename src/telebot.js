@@ -97,10 +97,77 @@ class Telebot extends EventEmitter {
     this._request('sendMessage', params)
   }
 
+  answerCallbackQuery(callbackQueryId, optionalParams) {
+    if (callback_query === undefined) {
+      throw 'callback_query_id is undefined';
+    };
+
+    let params = {
+      callback_query_id: callbackQueryId
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('answerCallbackQuery', params)
+  }
+
+  editMessageText(chatId, messageId, inlineMessageId, text, optionalParams) {
+    let params = {};
+    if (chatId === undefined && messageId === undefined) {
+      params = {
+        inline_message_id: inlineMessageId,
+        text: text
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        message_id: messageId,
+        text: text
+      }
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('editMessageText', params);
+  }
+
+  editMessageCaption(chatId, messageId, caption, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId,
+      caption: caption
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('editMessageCaption', params);
+  }
+
+  editMessageReplyMarkup(chatId, messageId, replyMarkup) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId,
+      reply_markup: replyMarkup
+    }
+
+    this._request('editMessageReplyMarkup', params);
+  }
+
+  answerInlineQuery(inlineQueryId, results, optionalParams) {
+    let params = {
+      inline_query_id: inlineQueryId,
+      results: results
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('answerInlineQuery', params);
+  }
+
   processUpdates(updates) {
     updates.forEach(update => {
       let message = update.message;
-      let callbackQuery = update.callbackQuery;
+      let callbackQuery = update.callback_query;
       let inlineQuery = update.inline_query;
       let chosenInlineResult = update.chosen_inline_result;
 
