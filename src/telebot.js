@@ -4,11 +4,17 @@ const Request = require('request-promise');
 class Telebot extends EventEmitter {
   constructor(token) {
     super();
+    if (token === undefined) {
+      throw new Error('Please provide a Telegram bot token when instantiating');
+    }
     this._token = token;
     this._offset = 0;
   }
 
   _request(method, params) {
+    if (arguments.length === 0 || typeof arguments[0] !== 'string') {
+      throw new Error('Please provide method as a string');
+    }
 
     let options = {
       uri: 'https://api.telegram.org/bot' + this._token + '/' + method,
@@ -23,11 +29,10 @@ class Telebot extends EventEmitter {
       if (resp.statusCode !== 200) {
         throw new Error(resp.statusCode + ':\n'+ resp.body);
       };
-
       let updates = JSON.parse(resp.body);
 
       if (updates.ok) {
-        return updates.result;
+        return updates;
       };
     })
     .catch(error => {
@@ -35,45 +40,42 @@ class Telebot extends EventEmitter {
     });
   }
 
-  getMe() {
-    let options = {
-      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
-      resolveWithFullResponse: true
-    };
+  _processUpdates(updates) {
+    updates.result.forEach(update => {
+      this._offset = update.update_id;
+      let message = update.message;
+      let callbackQuery = update.callback_query;
+      let inlineQuery = update.inline_query;
+      let chosenInlineResult = update.chosen_inline_result;
 
-    return Request(options);
+      if (message) {
+        this.emit('message', message);
+      } else if (callbackQuery) {
+        this.emit('callback_query', callbackQuery);
+      } else if (inlineQuery) {
+        this.emit('inline_query', inlineQuery);
+      } else if (chosenInlineResult) {
+        this.emit('chosen_inline_result', chosenInlineResult);
+      }
+    });
+  }
+
+  getMe() {
+    return this._request('getMe').then(updates => {
+      return updates.result;
+    });
   }
 
   getUpdates() {
-    let options = {
-      uri: 'https://api.telegram.org/bot' + this._token + '/getUpdates',
-      qs: {
-        offset: this._offset + 1,
-        timeout: 10
-      },
-      simple: false,
-      resolveWithFullResponse: true,
-      forever: true
+    this._offset++;
+    let params = {
+      offset: this._offset,
+      timeout: 10
     };
 
-    return Request(options)
-    .then(resp => {
-      if (resp.statusCode !== 200) {
-        throw new Error(resp.statusCode + ':\n'+ resp.body);
-      };
-
-      let updates = JSON.parse(resp.body);
-
-      if (updates.ok) {
-        updates.result.forEach(update => {
-          this._offset = update.update_id;
-        });
-        this.processUpdates(updates.result);
-        return updates.result;
-      };
-    })
-    .catch(error => {
-      throw error;
+    return this._request('getUpdates', params)
+    .then(updates => {
+      this._processUpdates(updates);
     })
     .finally(() => {
       setTimeout(() => this.getUpdates(), 300);
@@ -81,12 +83,6 @@ class Telebot extends EventEmitter {
   }
 
   sendMessage(chatId, text, optionalParams) {
-    if (chatId === undefined) {
-      throw 'chat_id is undefined';
-    } else if (text === undefined) {
-      throw 'please provide a message to send';
-    };
-
     let params = {
       chat_id: chatId,
       text: text
@@ -94,14 +90,10 @@ class Telebot extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendMessage', params)
+    return this._request('sendMessage', params);
   }
 
   answerCallbackQuery(callbackQueryId, optionalParams) {
-    if (callback_query === undefined) {
-      throw 'callback_query_id is undefined';
-    };
-
     let params = {
       callback_query_id: callbackQueryId
     }
@@ -111,19 +103,11 @@ class Telebot extends EventEmitter {
     this._request('answerCallbackQuery', params)
   }
 
-  editMessageText(chatId, messageId, inlineMessageId, text, optionalParams) {
-    let params = {};
-    if (chatId === undefined && messageId === undefined) {
-      params = {
-        inline_message_id: inlineMessageId,
-        text: text
-      };
-    } else {
-      params = {
-        chat_id: chatId,
-        message_id: messageId,
-        text: text
-      }
+  editMessageText(chatId, messageId, text, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId,
+      text: text
     }
 
     Object.assign(params, optionalParams);
@@ -162,25 +146,6 @@ class Telebot extends EventEmitter {
     Object.assign(params, optionalParams);
 
     this._request('answerInlineQuery', params);
-  }
-
-  processUpdates(updates) {
-    updates.forEach(update => {
-      let message = update.message;
-      let callbackQuery = update.callback_query;
-      let inlineQuery = update.inline_query;
-      let chosenInlineResult = update.chosen_inline_result;
-
-      if (message) {
-        this.emit('message', message);
-      } else if (callbackQuery) {
-        this.emit('callback_query', callbackQuery);
-      } else if (inlineQuery) {
-        this.emit('inline_query', inlineQuery);
-      } else if (chosenInlineResult) {
-        this.emit('chosen_inline_result', chosenInlineResult);
-      }
-    });
   }
 }
 
