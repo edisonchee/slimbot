@@ -119,12 +119,12 @@ describe('Telebot', () => {
 
   // Telegram Bot API methods
 
-  describe('#getUpdates', () => {
+  describe('startPolling', () => {
     let currentOffset;
 
     beforeEach(() => {
       currentOffset = telebot._offset;
-      telebot.getUpdates();
+      telebot.startPolling();
     });
 
     it('should increase offset by 1', function() {
@@ -133,7 +133,7 @@ describe('Telebot', () => {
 
     it('should call telebot._request', () => {
       spyOn(telebot, '_request').and.returnValue(Bluebird.resolve());
-      telebot.getUpdates();
+      telebot.startPolling();
       expect(telebot._request).toHaveBeenCalled();
     });
   });

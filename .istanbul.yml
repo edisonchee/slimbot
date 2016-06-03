@@ -4,7 +4,7 @@ instrumentation:
     extensions:
         - .js
     default-excludes: true
-    excludes: ['**/spec/**', '**/examples/**']
+    excludes: ['**/spec/**', '**/examples/**', '**/src/telegram.js']
     embed-source: false
     variable: __coverage__
     compact: true

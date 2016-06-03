@@ -9,4 +9,4 @@ telebot.on('message', (message) => {
 
 // // Call API
 
-telebot.getUpdates();
+telebot.startPolling();
