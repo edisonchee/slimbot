@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/edisonchee/telebot.svg?branch=master)](https://travis-ci.org/edisonchee/telebot)
+[![Coverage Status](https://coveralls.io/repos/github/edisonchee/telebot/badge.svg?branch=subclass)](https://coveralls.io/github/edisonchee/telebot?branch=subclass)
 
 # Telebot
 
@@ -18,7 +19,7 @@ telebot.on('message', (message) => {
 
 // Call API
 
-telebot.getUpdates();
+telebot.startPolling();
 ```
 
 ## Events
