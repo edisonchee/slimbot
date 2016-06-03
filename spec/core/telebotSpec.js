@@ -121,13 +121,12 @@ describe('Telebot', () => {
 
   describe('startPolling', () => {
     let currentOffset;
-
     beforeEach(() => {
       currentOffset = telebot._offset;
       telebot.startPolling();
     });
 
-    it('should increase offset by 1', function() {
+    it('should increase offset by 1', () => {
       expect(currentOffset < telebot._offset).toEqual(true);
     });
 
@@ -135,6 +134,15 @@ describe('Telebot', () => {
       spyOn(telebot, '_request').and.returnValue(Bluebird.resolve());
       telebot.startPolling();
       expect(telebot._request).toHaveBeenCalled();
+    });
+
+    it('should call telebot._processUpdates', (done) => {
+      spyOn(telebot, '_request').and.returnValue(Bluebird.resolve({}));
+      spyOn(telebot, '_processUpdates');
+      telebot.startPolling().then(() => {
+        expect(telebot._processUpdates).toHaveBeenCalled();
+        done();
+      });
     });
   });
 });

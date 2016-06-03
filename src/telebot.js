@@ -29,7 +29,7 @@ class Telebot extends Telegram(EventEmitter) {
 
   startPolling() {
     this._offset++;
-    super.getUpdates(this._offset)
+    return super.getUpdates(this._offset)
     .then(updates => {
       this._processUpdates(updates);
     })

@@ -20,7 +20,7 @@
   "license": "MIT",
   "scripts": {
     "start": "pm2 start src/index.js --watch",
-    "test": "istanbul cover jasmine spec/core/*.js"
+    "test": "istanbul cover jasmine --captureExceptions spec/core/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
     "bluebird": "^3.4.0",
@@ -28,6 +28,7 @@
     "request-promise": "^3.0.0"
   },
   "devDependencies": {
+    "coveralls": "^2.11.9",
     "eslint": "^2.11.0",
     "istanbul": "^0.4.3",
     "jasmine": "^2.4.1",
