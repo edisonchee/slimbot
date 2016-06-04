@@ -22,6 +22,18 @@ telebot.on('message', message => {
 telebot.startPolling();
 ```
 
+Now go ahead and type a message to your bot in Telegram. It should reply you with 'Message received' in the chat.
+
+All methods return a promise. This means you can inspect the returned [objects](https://core.telegram.org/bots/api#available-types) if you want to:
+
+```javascript
+telebot.sendMessage('123456789', 'Message received').then(message => {
+  console.log(message);
+});
+```
+
+In this case, the ```sendMessage``` method returns a [Message](https://core.telegram.org/bots/api#message) object as stated in the [documentation](https://core.telegram.org/bots/api#sendmessage).
+
 ## Events
 
 Events you can listen to:
