@@ -11,12 +11,15 @@ class Telebot extends Telegram(EventEmitter) {
     updates.result.forEach(update => {
       this._offset = update.update_id;
       let message = update.message;
+      let editedMessage = update.edited_message;
       let callbackQuery = update.callback_query;
       let inlineQuery = update.inline_query;
       let chosenInlineResult = update.chosen_inline_result;
 
       if (message) {
         this.emit('message', message);
+      } else if (editedMessage) {
+        this.emit('edited_message', edited_message);
       } else if (callbackQuery) {
         this.emit('callback_query', callbackQuery);
       } else if (inlineQuery) {
