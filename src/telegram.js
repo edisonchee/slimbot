@@ -164,6 +164,167 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     this._request('sendDocument', params);
   }
+
+  sendSticker(chatId, sticker, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      sticker: sticker
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('sendSticker', params);
+  }
+
+  sendVideo(chatId, video, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      video: video
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('sendVideo', params);
+  }
+
+  sendVoice(chatId, voice, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      voice: voice
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('sendVoice', params);
+  }
+
+  sendLocation(chatId, lat, lon, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      latitude: lat,
+      longitude: lon
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('sendLocation', params);
+  }
+
+  sendVenue(chatId, lat, lon, title, address, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      latitude: lat,
+      longitude: lon,
+      title: title,
+      address: address
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('sendVenue', params);
+  }
+
+  sendContact(chatId, phoneNumber, firstName, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      phone_number: phoneNumber,
+      first_name: firstName
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('sendContact', params);
+  }
+
+  sendChatAction(chatId, action) {
+    if (typeof action !== 'string') {
+      throw new Error('sendChatAction method needs a string input');
+    }
+
+    let params = {
+      chat_id: chatId,
+      action: action
+    }
+
+    this._request('sendChatAction', params);
+  }
+
+  getUserProfilePhotos(userId, optionalParams) {
+    let params = {
+      user_id: userId,
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('getUserProfilePhotos', params);
+  }
+
+  getFile(fileId) {
+    let params = {
+      file_id: fileId
+    }
+
+    this._request('getFile', params);
+  }
+
+  kickChatMember(chatId, userId) {
+    let params = {
+      chat_id: chatId,
+      user_id: userId
+    }
+
+    this._request('kickChatMember', params);
+  }
+
+  leaveChat(chatId) {
+    let params = {
+      chat_id: chatId
+    }
+
+    this._request('leaveChat', params);
+  }
+
+  unbanChatMember(chatId, userId) {
+    let params = {
+      chat_id: chatId,
+      user_id: userId
+    }
+
+    this._request('unbanChatMember', params);
+  }
+
+  getChat(chatId) {
+    let params = {
+      chat_id: chatId
+    }
+
+    this._request('getChat', params);
+  }
+
+  getChatAdministrators(chatId) {
+    let params = {
+      chat_id: chatId
+    }
+
+    this._request('getChatAdministrators', params);
+  }
+
+  getChatMembersCount(chatId) {
+    let params = {
+      chat_id: chatId
+    }
+
+    this._request('getChatMembersCount', params);
+  }
+
+  getChatMember(chatId, userId) {
+    let params = {
+      chat_id: chatId,
+      user_id: userId
+    }
+
+    this._request('getChatMember', params);
+  }
 }
 
 module.exports = Telegram;

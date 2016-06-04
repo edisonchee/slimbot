@@ -7,6 +7,6 @@ telebot.on('message', (message) => {
   telebot.sendMessage(message.chat.id, 'Message received');
 });
 
-// // Call API
+// Call API
 
 telebot.startPolling();
