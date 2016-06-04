@@ -40,9 +40,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   getMe() {
-    return this._request('getMe').then(updates => {
-      return updates.result;
-    });
+    return this._request('getMe');
   }
 
   getUpdates(offset) {
@@ -87,6 +85,17 @@ const Telegram = EventEmitter => class extends EventEmitter {
     this._request('editMessageText', params);
   }
 
+  editInlineMessageText(inlineMessageId, text, optionalParams) {
+    let params = {
+      inline_message_id: inlineMessageId,
+      text: text
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('editMessageText', params);
+  }
+
   editMessageCaption(chatId, messageId, caption, optionalParams) {
     let params = {
       chat_id: chatId,
@@ -99,10 +108,30 @@ const Telegram = EventEmitter => class extends EventEmitter {
     this._request('editMessageCaption', params);
   }
 
+  editInlineMessageCaption(inlineMessagId, caption, optionalParams) {
+    let params = {
+      inline_message_id: inlineMessageId,
+      caption: caption
+    }
+
+    Object.assign(params, optionalParams);
+
+    this._request('editMessageCaption', params);
+  }
+
   editMessageReplyMarkup(chatId, messageId, replyMarkup) {
     let params = {
       chat_id: chatId,
       message_id: messageId,
+      reply_markup: replyMarkup
+    }
+
+    this._request('editMessageReplyMarkup', params);
+  }
+
+  editInlineMessageReplyMarkup(inlineMessageId, replyMarkup) {
+    let params = {
+      inline_message_id: inlineMessageId,
       reply_markup: replyMarkup
     }
 

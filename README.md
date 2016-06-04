@@ -3,13 +3,13 @@
 
 # Telebot
 
-Telegram Bot API for Node.js.
+A fuss-free, thin wrapper around Telegram Bot API for Node.js.
 
 ## Getting started
 
 ```javascript
 const Telebot = require('../src/telebot');
-const telebot = new Telebot(process.env['TELEGRAM_TOKEN_2']);
+const telebot = new Telebot(process.env['TELEGRAM_TOKEN']);
 
 // Register listeners
 
@@ -26,16 +26,26 @@ telebot.startPolling();
 
 Events you can listen to:
 * 'message'
+* 'edited_message'
 * 'callback_query'
 * 'inline_query'
 * 'chosen_inline_result'
 
 ## Methods
 
-Methods implemented:
-* sendMessage
-* answerCallbackQuery
-* editMessageText
-* editMessageCaption
-* editMessageReplyMarkup
-* answerInlineQuery
+All methods found in their [documentation](https://core.telegram.org/bots/api#available-methods) is implemented.
+
+Additional methods implemented are:
+* editInlineMessageText
+* editInlineMessageCaption
+* editInlineMessageReplyMarkup
+
+Call these methods with ```inline_message_id``` rather than ```chat_id``` and ```message_id```.
+
+```javascript
+
+telebot.editMessageText('123456789', 1234, 'edited message');
+
+telebot.editInlineMessageText('4321', 'edited message');
+
+```
