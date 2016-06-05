@@ -19,7 +19,7 @@ class Telebot extends Telegram(EventEmitter) {
       if (message) {
         this.emit('message', message);
       } else if (editedMessage) {
-        this.emit('edited_message', edited_message);
+        this.emit('edited_message', editedMessage);
       } else if (callbackQuery) {
         this.emit('callback_query', callbackQuery);
       } else if (inlineQuery) {

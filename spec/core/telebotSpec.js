@@ -59,6 +59,7 @@ describe('Telebot', () => {
         updates = {
           result: [
             { message: 'message' },
+            { edited_message: 'edited_message' },
             { callback_query: 'callback_query' },
             { inline_query: 'inline_query' },
             { chosen_inline_result: 'chosen_inline_result' }
@@ -76,6 +77,18 @@ describe('Telebot', () => {
         telebot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('message');
+      });
+
+      it('should emit "edited_message" if update is of type "edited_message"', () => {
+        telebot.on('edited_message', (data) => {
+          if (data !== undefined) {
+            flag = true;
+            payload = data;
+          };
+        });
+        telebot._processUpdates(updates);
+        expect(flag).toEqual(true);
+        expect(payload).toEqual('edited_message');
       });
 
       it('should emit "callback_query" if update is of type "callback_query"', () => {
