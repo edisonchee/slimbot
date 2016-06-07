@@ -70,7 +70,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('answerCallbackQuery', params)
+    return this._request('answerCallbackQuery', params)
   }
 
   editMessageText(chatId, messageId, text, optionalParams) {
@@ -82,7 +82,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('editMessageText', params);
+    return this._request('editMessageText', params);
   }
 
   editInlineMessageText(inlineMessageId, text, optionalParams) {
@@ -93,7 +93,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('editMessageText', params);
+    return this._request('editMessageText', params);
   }
 
   editMessageCaption(chatId, messageId, caption, optionalParams) {
@@ -105,7 +105,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('editMessageCaption', params);
+    return this._request('editMessageCaption', params);
   }
 
   editInlineMessageCaption(inlineMessagId, caption, optionalParams) {
@@ -116,7 +116,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('editMessageCaption', params);
+    return this._request('editMessageCaption', params);
   }
 
   editMessageReplyMarkup(chatId, messageId, replyMarkup) {
@@ -126,7 +126,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       reply_markup: replyMarkup
     }
 
-    this._request('editMessageReplyMarkup', params);
+    return this._request('editMessageReplyMarkup', params);
   }
 
   editInlineMessageReplyMarkup(inlineMessageId, replyMarkup) {
@@ -135,7 +135,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       reply_markup: replyMarkup
     }
 
-    this._request('editMessageReplyMarkup', params);
+    return this._request('editMessageReplyMarkup', params);
   }
 
   answerInlineQuery(inlineQueryId, results, optionalParams) {
@@ -146,7 +146,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('answerInlineQuery', params);
+    return this._request('answerInlineQuery', params);
   }
 
   forwardMessage(chatId, fromChatId, messageId, optionalParams) {
@@ -158,7 +158,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('forwardMessage', params);
+    return this._request('forwardMessage', params);
   }
 
   sendPhoto(chatId, photo, optionalParams) {
@@ -169,7 +169,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendPhoto', params);
+    return this._request('sendPhoto', params);
   }
 
   sendAudio(chatId, audio, optionalParams) {
@@ -180,7 +180,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendAudio', params);
+    return this._request('sendAudio', params);
   }
 
   sendDocument(chatId, document, optionalParams) {
@@ -191,7 +191,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendDocument', params);
+    return this._request('sendDocument', params);
   }
 
   sendSticker(chatId, sticker, optionalParams) {
@@ -202,7 +202,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendSticker', params);
+    return this._request('sendSticker', params);
   }
 
   sendVideo(chatId, video, optionalParams) {
@@ -213,7 +213,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendVideo', params);
+    return this._request('sendVideo', params);
   }
 
   sendVoice(chatId, voice, optionalParams) {
@@ -224,7 +224,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendVoice', params);
+    return this._request('sendVoice', params);
   }
 
   sendLocation(chatId, lat, lon, optionalParams) {
@@ -236,7 +236,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendLocation', params);
+    return this._request('sendLocation', params);
   }
 
   sendVenue(chatId, lat, lon, title, address, optionalParams) {
@@ -250,7 +250,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendVenue', params);
+    return this._request('sendVenue', params);
   }
 
   sendContact(chatId, phoneNumber, firstName, optionalParams) {
@@ -262,7 +262,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('sendContact', params);
+    return this._request('sendContact', params);
   }
 
   sendChatAction(chatId, action) {
@@ -275,7 +275,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       action: action
     }
 
-    this._request('sendChatAction', params);
+    return this._request('sendChatAction', params);
   }
 
   getUserProfilePhotos(userId, optionalParams) {
@@ -285,7 +285,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     Object.assign(params, optionalParams);
 
-    this._request('getUserProfilePhotos', params);
+    return this._request('getUserProfilePhotos', params);
   }
 
   getFile(fileId) {
@@ -293,7 +293,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       file_id: fileId
     }
 
-    this._request('getFile', params);
+    return this._request('getFile', params);
   }
 
   kickChatMember(chatId, userId) {
@@ -302,7 +302,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       user_id: userId
     }
 
-    this._request('kickChatMember', params);
+    return this._request('kickChatMember', params);
   }
 
   leaveChat(chatId) {
@@ -310,7 +310,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       chat_id: chatId
     }
 
-    this._request('leaveChat', params);
+    return this._request('leaveChat', params);
   }
 
   unbanChatMember(chatId, userId) {
@@ -319,7 +319,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       user_id: userId
     }
 
-    this._request('unbanChatMember', params);
+    return this._request('unbanChatMember', params);
   }
 
   getChat(chatId) {
@@ -327,7 +327,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       chat_id: chatId
     }
 
-    this._request('getChat', params);
+    return this._request('getChat', params);
   }
 
   getChatAdministrators(chatId) {
@@ -335,7 +335,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       chat_id: chatId
     }
 
-    this._request('getChatAdministrators', params);
+    return this._request('getChatAdministrators', params);
   }
 
   getChatMembersCount(chatId) {
@@ -343,7 +343,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       chat_id: chatId
     }
 
-    this._request('getChatMembersCount', params);
+    return this._request('getChatMembersCount', params);
   }
 
   getChatMember(chatId, userId) {
@@ -352,7 +352,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       user_id: userId
     }
 
-    this._request('getChatMember', params);
+    return this._request('getChatMember', params);
   }
 }
 
