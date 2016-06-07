@@ -15,7 +15,7 @@
     "node"
   ],
   "engines": {
-    "node": "6.2.0"
+    "node": "6.2.1"
   },
   "license": "MIT",
   "scripts": {
