@@ -1,9 +1,9 @@
 const Bluebird = require('bluebird');
 const mockery = require('mockery');
-let Telebot;
-let telebot;
+let Slimbot;
+let slimbot;
 
-describe('Telebot', () => {
+describe('Slimbot', () => {
 
   beforeEach(() => {
     mockery.enable({
@@ -21,8 +21,8 @@ describe('Telebot', () => {
       return Bluebird.resolve(response);
     });
 
-    Telebot = require('../../src/telebot');
-    telebot = new Telebot('token');
+    Slimbot = require('../../src/slimbot');
+    slimbot = new Slimbot('token');
   });
 
   afterEach(() => {
@@ -33,19 +33,19 @@ describe('Telebot', () => {
   describe('Core', () => {
     describe('instantiating', () => {
       it('should throw an error if token is not provided', () => {
-        expect(() => { const bot = new Telebot(); }).toThrow();
+        expect(() => { const bot = new Slimbot(); }).toThrow();
       });
     });
 
     describe('_request', () => {
       it('should throw an error if no method provided', (done) => {
-        expect(() => { telebot._request(); }).toThrow();
-        expect(() => { telebot._request(['getMe']); }).toThrow();
+        expect(() => { slimbot._request(); }).toThrow();
+        expect(() => { slimbot._request(['getMe']); }).toThrow();
         done();
       });
 
       it('should return a promise', (done) => {
-        expect(typeof telebot._request('getUpdates').then === 'function').toEqual(true);
+        expect(typeof slimbot._request('getUpdates').then === 'function').toEqual(true);
         done();
       });
     });
@@ -68,61 +68,61 @@ describe('Telebot', () => {
       });
 
       it('should emit "message" if update is of type "message"', () => {
-        telebot.on('message', (data) => {
+        slimbot.on('message', (data) => {
           if (data !== undefined) {
             flag = true;
             payload = data;
           };
         });
-        telebot._processUpdates(updates);
+        slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('message');
       });
 
       it('should emit "edited_message" if update is of type "edited_message"', () => {
-        telebot.on('edited_message', (data) => {
+        slimbot.on('edited_message', (data) => {
           if (data !== undefined) {
             flag = true;
             payload = data;
           };
         });
-        telebot._processUpdates(updates);
+        slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('edited_message');
       });
 
       it('should emit "callback_query" if update is of type "callback_query"', () => {
-        telebot.on('callback_query', (data) => {
+        slimbot.on('callback_query', (data) => {
           if (data !== undefined) {
             flag = true;
             payload = data;
           };
         });
-        telebot._processUpdates(updates);
+        slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('callback_query');
       });
 
       it('should emit "inline_query" if update is of type "inline_query"', () => {
-        telebot.on('inline_query', (data) => {
+        slimbot.on('inline_query', (data) => {
           if (data !== undefined) {
             flag = true;
             payload = data;
           };
         });
-        telebot._processUpdates(updates);
+        slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('inline_query');
       });
 
       it('should emit "chosen_inline_result" if update is of type "chosen_inline_result"', () => {
-        telebot.on('chosen_inline_result', (data) => {
+        slimbot.on('chosen_inline_result', (data) => {
           if (data !== undefined) {
             flag = true;
             payload = data;
           };
         });
-        telebot._processUpdates(updates);
+        slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('chosen_inline_result');
       });
@@ -135,25 +135,25 @@ describe('Telebot', () => {
   describe('startPolling', () => {
     let currentOffset;
     beforeEach(() => {
-      currentOffset = telebot._offset;
-      telebot.startPolling();
+      currentOffset = slimbot._offset;
+      slimbot.startPolling();
     });
 
     it('should increase offset by 1', () => {
-      expect(currentOffset < telebot._offset).toEqual(true);
+      expect(currentOffset < slimbot._offset).toEqual(true);
     });
 
-    it('should call telebot._request', () => {
-      spyOn(telebot, '_request').and.returnValue(Bluebird.resolve());
-      telebot.startPolling();
-      expect(telebot._request).toHaveBeenCalled();
+    it('should call slimbot._request', () => {
+      spyOn(slimbot, '_request').and.returnValue(Bluebird.resolve());
+      slimbot.startPolling();
+      expect(slimbot._request).toHaveBeenCalled();
     });
 
-    it('should call telebot._processUpdates', (done) => {
-      spyOn(telebot, '_request').and.returnValue(Bluebird.resolve({}));
-      spyOn(telebot, '_processUpdates');
-      telebot.startPolling().then(() => {
-        expect(telebot._processUpdates).toHaveBeenCalled();
+    it('should call slimbot._processUpdates', (done) => {
+      spyOn(slimbot, '_request').and.returnValue(Bluebird.resolve({}));
+      spyOn(slimbot, '_processUpdates');
+      slimbot.startPolling().then(() => {
+        expect(slimbot._processUpdates).toHaveBeenCalled();
         done();
       });
     });
