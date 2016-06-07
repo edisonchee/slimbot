@@ -1,7 +1,7 @@
 const EventEmitter = require('eventemitter3');
 const Telegram = require('./telegram');
 
-class Telebot extends Telegram(EventEmitter) {
+class Slimbot extends Telegram(EventEmitter) {
   constructor(token) {
     super(token);
     this._offset = 0;
@@ -42,4 +42,4 @@ class Telebot extends Telegram(EventEmitter) {
   }
 }
 
-module.exports = Telebot;
+module.exports = Slimbot;
