@@ -1,25 +1,29 @@
-[![Build Status](https://travis-ci.org/edisonchee/telebot.svg?branch=master)](https://travis-ci.org/edisonchee/telebot)
-[![Coverage Status](https://coveralls.io/repos/github/edisonchee/telebot/badge.svg?branch=subclass)](https://coveralls.io/github/edisonchee/telebot?branch=subclass)
+[![Build Status](https://travis-ci.org/edisonchee/slimbot.svg?branch=master)](https://travis-ci.org/edisonchee/slimbot)
+[![Coverage Status](https://coveralls.io/repos/github/edisonchee/slimbot/badge.svg?branch=master)](https://coveralls.io/github/edisonchee/slimbot?branch=master)
 
-# Telebot
+# Slimbot
 
-A fuss-free, thin wrapper around Telegram Bot API for Node.js.
+A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
 ## Getting started
 
 ```javascript
-const Telebot = require('../src/telebot');
-const telebot = new Telebot(process.env['TELEGRAM_TOKEN']);
+npm i slimbot
+```
+
+```javascript
+const Slimbot = require('slimbot');
+const slimbot = new Slimbot(process.env['TELEGRAM_TOKEN']);
 
 // Register listeners
 
-telebot.on('message', message => {
-  telebot.sendMessage(message.chat.id, 'Message received');
+slimbot.on('message', message => {
+  slimbot.sendMessage(message.chat.id, 'Message received');
 });
 
 // Call API
 
-telebot.startPolling();
+slimbot.startPolling();
 ```
 
 Now go ahead and type a message to your bot in Telegram. It should reply you with 'Message received' in the chat.
@@ -27,7 +31,7 @@ Now go ahead and type a message to your bot in Telegram. It should reply you wit
 All methods return a promise. This means you can inspect the returned [objects](https://core.telegram.org/bots/api#available-types) if you want to:
 
 ```javascript
-telebot.sendMessage('123456789', 'Message received').then(message => {
+slimbot.sendMessage('123456789', 'Message received').then(message => {
   console.log(message);
 });
 ```
@@ -46,23 +50,23 @@ Events you can listen to:
 Take note that ```inline_query``` and ```chosen_inline_result``` only works if you have sent ```/setinline``` and ```/setinlinefeedback``` commands to @BotFather. [Read the docs for more information](https://core.telegram.org/bots/inline).
 
 ```javascript
-telebot.on('message', message => {
+slimbot.on('message', message => {
   // do something with message
 });
 
-telebot.on('edited_message', message => {
+slimbot.on('edited_message', message => {
   // do something with message
 });
 
-telebot.on('callback_query', query => {
+slimbot.on('callback_query', query => {
   // do something with query
 });
 
-telebot.on('inline_query', query => {
+slimbot.on('inline_query', query => {
   // do something with query
 });
 
-telebot.on('chosen_inline_result', result => {
+slimbot.on('chosen_inline_result', result => {
   // do something with result
 });
 
@@ -75,7 +79,7 @@ All methods found in the [Telegram Bot API Documentation](https://core.telegram.
 Use them as they are described in the docs, providing the required parameters and if you wish, the optional parameters:
 
 ```javascript
-telebot.sendMessage('123456789', 'text');
+slimbot.sendMessage('123456789', 'text');
 
 let optionalParams = {
   parse_mode: true,
@@ -90,7 +94,7 @@ let optionalParams = {
   }
 }
 
-telebot.sendMessage('123456789', 'text', optionalParams);
+slimbot.sendMessage('123456789', 'text', optionalParams);
 ```
 
 Additional methods implemented are:
@@ -102,8 +106,8 @@ Call these additional methods with ```inline_message_id``` rather than ```chat_i
 
 ```javascript
 
-telebot.editMessageText('123456789', 1234, 'edited message');
+slimbot.editMessageText('123456789', 1234, 'edited message');
 
-telebot.editInlineMessageText('4321', 'edited message');
+slimbot.editInlineMessageText('4321', 'edited message');
 
 ```
