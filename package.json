@@ -1,13 +1,13 @@
 {
-  "name": "telebot",
+  "name": "slimbot",
   "version": "0.1.0",
-  "description": "Telegram Bot API for Node.js",
+  "description": "Simple and minimal Telegram Bot API for Node.js",
   "author": "Edison Chee <edisonchee@live.com>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/edisonchee/telebot.git"
   },
-  "main": "index.js",
+  "main": "./src/telebot.js",
   "keywords": [
     "telegram",
     "bot",
