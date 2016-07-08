@@ -10,7 +10,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
     this._token = token;
   }
 
-  _request(method, params) {
+  _request(method, params, formData) {
     if (arguments.length === 0 || typeof arguments[0] !== 'string') {
       throw new Error('Please provide method as a string');
     }
@@ -18,6 +18,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
     let options = {
       uri: 'https://api.telegram.org/bot' + this._token + '/' + method,
       qs: params,
+      formData: formData,
       simple: false,
       resolveWithFullResponse: true,
       forever: true
@@ -167,9 +168,13 @@ const Telegram = EventEmitter => class extends EventEmitter {
       photo: photo
     }
 
+    let formData = {
+      photo: photo
+    }
+
     Object.assign(params, optionalParams);
 
-    return this._request('sendPhoto', params);
+    return this._request('sendPhoto', params, formData);
   }
 
   sendAudio(chatId, audio, optionalParams) {
@@ -178,9 +183,15 @@ const Telegram = EventEmitter => class extends EventEmitter {
       audio: audio
     }
 
+    let formData = {
+      audio: audio
+    }
+
+    // write test for file size limit
+
     Object.assign(params, optionalParams);
 
-    return this._request('sendAudio', params);
+    return this._request('sendAudio', params, formData);
   }
 
   sendDocument(chatId, document, optionalParams) {
@@ -189,9 +200,15 @@ const Telegram = EventEmitter => class extends EventEmitter {
       document: document
     }
 
+    let formData = {
+      document: document
+    }
+
+    // write test for file size limit
+
     Object.assign(params, optionalParams);
 
-    return this._request('sendDocument', params);
+    return this._request('sendDocument', params, formData);
   }
 
   sendSticker(chatId, sticker, optionalParams) {
@@ -200,9 +217,13 @@ const Telegram = EventEmitter => class extends EventEmitter {
       sticker: sticker
     }
 
+    let formData = {
+      sticker: sticker
+    }
+
     Object.assign(params, optionalParams);
 
-    return this._request('sendSticker', params);
+    return this._request('sendSticker', params, formData);
   }
 
   sendVideo(chatId, video, optionalParams) {
@@ -210,6 +231,13 @@ const Telegram = EventEmitter => class extends EventEmitter {
       chat_id: chatId,
       video: video
     }
+
+    let formData = {
+      video: video
+    }
+
+    // write test for file size limit
+    // write test for file size type (only .mp4)
 
     Object.assign(params, optionalParams);
 
@@ -221,6 +249,13 @@ const Telegram = EventEmitter => class extends EventEmitter {
       chat_id: chatId,
       voice: voice
     }
+
+    let formData = {
+      voice: voice
+    }
+
+    // write test for file size limit
+    // write test for file size type (only .ogg encoded in OPUS)
 
     Object.assign(params, optionalParams);
 

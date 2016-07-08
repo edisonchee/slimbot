@@ -23,14 +23,14 @@
     "test": "istanbul cover jasmine --captureExceptions spec/core/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "bluebird": "^3.4.0",
+    "bluebird": "^3.4.1",
     "eventemitter3": "^1.2.0",
     "request-promise": "^3.0.0"
   },
   "devDependencies": {
     "coveralls": "^2.11.9",
-    "eslint": "^2.11.0",
-    "istanbul": "^0.4.3",
+    "eslint": "^3.0.1",
+    "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "mockery": "^1.7.0"
   },
