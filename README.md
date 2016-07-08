@@ -99,6 +99,22 @@ let optionalParams = {
 slimbot.sendMessage('123456789', 'text', optionalParams);
 ```
 
+You can send files to chats using ```file_id``` or [InputFile](https://core.telegram.org/bots/api#inputfile). This works for ```sendPhoto```, ```sendAudio```, ```sendDocument```, ```sendSticker```, ```sendVideo```, and ```sendVoice```.
+
+Check out the [example](https://github.com/edisonchee/slimbot/blob/master/examples/getUpdates.js) to see how you can do so:
+
+```javascript
+const fs = require('fs');
+
+let inputFile = fs.createReadStream(__dirname + '/bulb.png');
+
+// this uploads the file to Telegram's servers
+slimbot.sendPhoto(message.chat.id, inputFile).then(message => {
+  // once successful, you can grab the file_id of the file
+  console.log(message.result.photo[0].file_id);
+});
+```
+
 Additional methods implemented are:
 * editInlineMessageText
 * editInlineMessageCaption
