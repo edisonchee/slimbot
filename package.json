@@ -25,11 +25,11 @@
   "dependencies": {
     "bluebird": "^3.4.1",
     "eventemitter3": "^1.2.0",
-    "request-promise": "^4.0.2"
+    "request-promise": "^4.1.0"
   },
   "devDependencies": {
-    "coveralls": "^2.11.11",
-    "eslint": "^3.1.1",
+    "coveralls": "^2.11.12",
+    "eslint": "^3.2.2",
     "istanbul": "^0.4.4",
     "jasmine": "^2.4.1",
     "mockery": "^1.7.0"
