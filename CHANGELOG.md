@@ -1,1 +1,1 @@
-# Telebot changelog
+# Slimbot changelog
