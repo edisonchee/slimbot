@@ -7,6 +7,8 @@
 
 A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
+Updated for [Bot API 2.3.1](https://core.telegram.org/bots/api-changelog#december-4-2016).
+
 ## Getting started
 
 ```javascript
@@ -148,4 +150,28 @@ slimbot.editMessageText('123456789', 1234, 'edited message');
 
 // slimbot.editInlineMessageText(inline_message_id, 'edited message');
 slimbot.editInlineMessageText('4321', 'edited message');
+```
+
+## Webhook
+If you're familiar with the Telegram Bot API, you'd have realised by now that this library defaults to using ```getUpdates``` for simplicity and ease of use.
+
+Assuming you already have a domain name with SSL:
+```javascript
+const Slimbot = require('slimbot');
+const slimbot = new Slimbot(process.env['TELEGRAM_TOKEN']);
+
+// Register listeners
+
+slimbot.on('message', message => {
+  slimbot.sendMessage(message.chat.id, 'Message received');
+});
+
+// Setup webhook integration
+slimbot.setWebhook('https://www.example.com');
+
+// Get webhook status
+slimbot.getWebhookInfo();
+
+// Teardown webhook integration
+slimbot.deleteWebhook();
 ```

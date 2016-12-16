@@ -53,6 +53,18 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('getUpdates', params);
   }
 
+  setWebhook(url, optionalParams) {
+    return this._request('setWebhook', optionalParams);
+  }
+
+  deleteWebhook() {
+    return this._request('deleteWebhook');
+  }
+
+  getWebhookInfo() {
+    return this._request('getWebhookInfo');
+  }
+
   sendMessage(chatId, text, optionalParams) {
     let params = {
       chat_id: chatId,
