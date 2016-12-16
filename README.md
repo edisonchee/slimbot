@@ -108,23 +108,34 @@ let optionalParams = {
 slimbot.sendMessage('123456789', 'hello', optionalParams);
 ```
 
-You can send files to chats using ```file_id``` or [InputFile](https://core.telegram.org/bots/api#inputfile). This works for ```sendPhoto```, ```sendAudio```, ```sendDocument```, ```sendSticker```, ```sendVideo```, and ```sendVoice```.
+### Sending files
 
-Check out the [example](https://github.com/edisonchee/slimbot/blob/master/examples/getUpdates.js) to see how you can do so:
+There are [3 ways](https://core.telegram.org/bots/api#sending-files) to send files:
+1. Using a ```file_id``` when the the file already exists on Telegram's servers
+2. Using a ```HTTP URL```
+3. Uploading a file to Telegram's servers
+
+Check out the [full example](https://github.com/edisonchee/slimbot/blob/master/examples/sendFile.js) to learn how it works.
 
 ```javascript
 const fs = require('fs');
 
-let inputFile = fs.createReadStream(__dirname + '/bulb.png');
+// Method 1
+slimbot.sendPhoto(chat_id, 'AgADBQADqacxG2gbbxCWBkgvcmeAgxVPyjIABBlug37DKyhDEU0AAgI');
 
-// this uploads the file to Telegram's servers
-slimbot.sendPhoto(message.chat.id, inputFile).then(message => {
+// Method 2
+slimbot.sendPhoto(chat_id, 'https://fbatwork.files.wordpress.com/2016/10/govtech-logo.jpg');
+
+// Method 3
+let inputFile = fs.createReadStream(__dirname + '/bulb.png');
+slimbot.sendPhoto(chat_id, inputFile).then(message => {
   // once successful, you can grab the file_id of the file
   console.log(message.result.photo[0].file_id);
 });
 ```
 
 ## Additional methods implemented
+These are actually convenience methods that use the same underlying ```editMessageText``` method in the [API](https://core.telegram.org/bots/api#editmessagetext).
 * editInlineMessageText
 * editInlineMessageCaption
 * editInlineMessageReplyMarkup
@@ -132,7 +143,9 @@ slimbot.sendPhoto(message.chat.id, inputFile).then(message => {
 Call these additional methods with ```inline_message_id``` rather than ```chat_id``` and ```message_id```.
 
 ```javascript
+// slimbot.editMessageText(chat_id, message_id, 'edited message');
 slimbot.editMessageText('123456789', 1234, 'edited message');
 
+// slimbot.editInlineMessageText(inline_message_id, 'edited message');
 slimbot.editInlineMessageText('4321', 'edited message');
 ```

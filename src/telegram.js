@@ -389,6 +389,40 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     return this._request('getChatMember', params);
   }
+
+  // Games
+
+  sendGame(chatId, gameShortName, optionalParams) {
+    let params = {
+      chat_id: chatId,
+      game_short_name: gameShortName
+    }
+
+    Object.assign(params, optionalParams);
+
+    return this._request('sendGame', params);
+  }
+
+  setGameScore(userId, score, optionalParams) {
+    let params = {
+      user_id: userId,
+      score: score
+    }
+
+    Object.assign(params, optionalParams);
+
+    return this._request('setGameScore', params);
+  }
+
+  getGameHighScores(userId, optionalParams) {
+    let params = {
+      user_id: userId
+    }
+
+    Object.assign(params, optionalParams);
+
+    return this._request('getGameHighScores', params);
+  }
 }
 
 module.exports = Telegram;
