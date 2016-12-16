@@ -45,6 +45,8 @@ In this case, the ```sendMessage``` method returns a [Message](https://core.tele
 Events you can listen to:
 * 'message'
 * 'edited_message'
+* 'channel_post'
+* 'edited_channel_post'
 * 'callback_query'
 * 'inline_query'
 * 'chosen_inline_result'
@@ -60,6 +62,14 @@ slimbot.on('edited_message', message => {
   // do something with message
 });
 
+slimbot.on('channel_post', post => {
+  // do something with post
+});
+
+slimbot.on('edited_channel_post', post => {
+  // do something with post
+});
+
 slimbot.on('callback_query', query => {
   // do something with query
 });
@@ -71,7 +81,6 @@ slimbot.on('inline_query', query => {
 slimbot.on('chosen_inline_result', result => {
   // do something with result
 });
-
 ```
 
 ## Methods
@@ -81,7 +90,7 @@ All methods found in the [Telegram Bot API Documentation](https://core.telegram.
 Use them as they are described in the docs, providing the required parameters and if you wish, the optional parameters:
 
 ```javascript
-slimbot.sendMessage('123456789', 'text');
+slimbot.sendMessage('123456789', 'hello');
 
 let optionalParams = {
   parse_mode: true,
@@ -96,7 +105,7 @@ let optionalParams = {
   }
 }
 
-slimbot.sendMessage('123456789', 'text', optionalParams);
+slimbot.sendMessage('123456789', 'hello', optionalParams);
 ```
 
 You can send files to chats using ```file_id``` or [InputFile](https://core.telegram.org/bots/api#inputfile). This works for ```sendPhoto```, ```sendAudio```, ```sendDocument```, ```sendSticker```, ```sendVideo```, and ```sendVoice```.
@@ -115,7 +124,7 @@ slimbot.sendPhoto(message.chat.id, inputFile).then(message => {
 });
 ```
 
-Additional methods implemented are:
+## Additional methods implemented
 * editInlineMessageText
 * editInlineMessageCaption
 * editInlineMessageReplyMarkup
@@ -123,9 +132,7 @@ Additional methods implemented are:
 Call these additional methods with ```inline_message_id``` rather than ```chat_id``` and ```message_id```.
 
 ```javascript
-
 slimbot.editMessageText('123456789', 1234, 'edited message');
 
 slimbot.editInlineMessageText('4321', 'edited message');
-
 ```

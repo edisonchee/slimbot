@@ -12,6 +12,8 @@ class Slimbot extends Telegram(EventEmitter) {
       this._offset = update.update_id;
       let message = update.message;
       let editedMessage = update.edited_message;
+      let channelPost = update.channel_post;
+      let editedChannelPost = update.edited_channel_post;
       let callbackQuery = update.callback_query;
       let inlineQuery = update.inline_query;
       let chosenInlineResult = update.chosen_inline_result;
@@ -20,6 +22,10 @@ class Slimbot extends Telegram(EventEmitter) {
         this.emit('message', message);
       } else if (editedMessage) {
         this.emit('edited_message', editedMessage);
+      } else if (channelPost) {
+        this.emit('channel_post', channelPost);
+      } else if (editedChannelPost) {
+        this.emit('edited_channel_post', editedChannelPost);
       } else if (callbackQuery) {
         this.emit('callback_query', callbackQuery);
       } else if (inlineQuery) {
@@ -34,10 +40,12 @@ class Slimbot extends Telegram(EventEmitter) {
     this._offset++;
     return super.getUpdates(this._offset)
     .then(updates => {
-      this._processUpdates(updates);
+      if (updates !== undefined) {
+        this._processUpdates(updates);
+      }
     })
     .finally(() => {
-      setTimeout(() => this.startPolling(), 300);
+      setTimeout(() => this.startPolling(), 3000);
     });
   }
 }
