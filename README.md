@@ -111,9 +111,9 @@ slimbot.sendMessage('123456789', 'hello', optionalParams);
 ### Sending files
 
 There are [3 ways](https://core.telegram.org/bots/api#sending-files) to send files:
-1. Using a ```file_id``` when the the file already exists on Telegram's servers
-2. Using a ```HTTP URL```
-3. Uploading a file to Telegram's servers
+* Using a ```file_id``` when the the file already exists on Telegram's servers
+* Using a ```HTTP URL```
+* Uploading a file to Telegram's servers
 
 Check out the [full example](https://github.com/edisonchee/slimbot/blob/master/examples/sendFile.js) to learn how it works.
 
