@@ -95,7 +95,7 @@ Use them as they are described in the docs, providing the required parameters an
 slimbot.sendMessage('123456789', 'hello');
 
 let optionalParams = {
-  parse_mode: true,
+  parse_mode: "markdown",
   disable_web_page_preview: true,
   disable_notification: true,
   reply_to_message_id: 1234,
