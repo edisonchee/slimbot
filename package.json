@@ -16,7 +16,7 @@
     "nodejs"
   ],
   "engines": {
-    "node": "7.2.1"
+    "node": "^7.3.0"
   },
   "license": "MIT",
   "scripts": {
@@ -24,7 +24,7 @@
     "test": "istanbul cover jasmine --captureExceptions spec/core/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "bluebird": "^3.4.6",
+    "bluebird": "^3.4.7",
     "eventemitter3": "^2.0.2",
     "request-promise": "^4.1.1"
   },
