@@ -40,3 +40,4 @@ Thumbs.db
 node_modules
 coverage
 .npmignore
+yarn.lock

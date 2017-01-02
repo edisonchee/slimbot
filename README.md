@@ -99,12 +99,12 @@ let optionalParams = {
   disable_web_page_preview: true,
   disable_notification: true,
   reply_to_message_id: 1234,
-  reply_markup: {
+  reply_markup: JSON.stringify({
     inline_keyboard: [[
       { text: 'Today', callback_data: 'pick_today' },
       { text: 'Pick a date', callback_data: 'pick_date' }
     ]]
-  }
+  })
 }
 
 slimbot.sendMessage('123456789', 'hello', optionalParams);
