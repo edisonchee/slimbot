@@ -27,8 +27,8 @@ slimbot.on('message', message => {
 // Because each inline keyboard button has callback data, you can listen for the callback data and do something with them
 
 slimbot.on('callback_query', query => {
-  if (query === 'hello') {
-    slimbot.sendMessage(query.chat.id, 'Hello to you too!');
+  if (query.data === 'hello') {
+    slimbot.sendMessage(query.message.chat.id, 'Hello to you too!');
   }
 });
 
