@@ -1,5 +1,5 @@
 const Slimbot = require('./src/slimbot');
-const slimbot = new Slimbot(process.env['SLIMBOT_TOKEN']);
+const slimbot = new Slimbot(process.env['TELEGRAM_BOT_TOKEN']);
 const fs = require('fs');
 
 // This is a working example that helps you understand how sending files with a Telegram Bot works

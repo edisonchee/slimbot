@@ -9,6 +9,12 @@ A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
 Updated for [Bot API 2.3.1](https://core.telegram.org/bots/api-changelog#december-4-2016).
 
+## Resources
+* [Telegram Bot API Documentation](https://core.telegram.org/bots/api)
+* [Release Notes](https://github.com/edisonchee/slimbot/releases)
+* [Examples](https://github.com/edisonchee/slimbot/tree/master/examples)
+* [Wiki](https://github.com/edisonchee/slimbot/wiki)
+
 ## Getting started
 
 ```javascript
@@ -17,7 +23,7 @@ npm i slimbot
 
 ```javascript
 const Slimbot = require('slimbot');
-const slimbot = new Slimbot(process.env['TELEGRAM_TOKEN']);
+const slimbot = new Slimbot(process.env['TELEGRAM_BOT_TOKEN']);
 
 // Register listeners
 
@@ -41,137 +47,3 @@ slimbot.sendMessage('123456789', 'Message received').then(message => {
 ```
 
 In this case, the ```sendMessage``` method returns a [Message](https://core.telegram.org/bots/api#message) object as stated in the [documentation](https://core.telegram.org/bots/api#sendmessage).
-
-## Events
-
-Events you can listen to:
-* 'message'
-* 'edited_message'
-* 'channel_post'
-* 'edited_channel_post'
-* 'callback_query'
-* 'inline_query'
-* 'chosen_inline_result'
-
-Take note that ```inline_query``` and ```chosen_inline_result``` only works if you have sent ```/setinline``` and ```/setinlinefeedback``` commands to @BotFather. [Read the docs for more information](https://core.telegram.org/bots/inline).
-
-```javascript
-slimbot.on('message', message => {
-  // do something with message
-});
-
-slimbot.on('edited_message', message => {
-  // do something with message
-});
-
-slimbot.on('channel_post', post => {
-  // do something with post
-});
-
-slimbot.on('edited_channel_post', post => {
-  // do something with post
-});
-
-slimbot.on('callback_query', query => {
-  // do something with query
-});
-
-slimbot.on('inline_query', query => {
-  // do something with query
-});
-
-slimbot.on('chosen_inline_result', result => {
-  // do something with result
-});
-```
-
-## Methods
-
-All methods found in the [Telegram Bot API Documentation](https://core.telegram.org/bots/api#available-methods) have been implemented.
-
-Use them as they are described in the docs, providing the required parameters and if you wish, the optional parameters:
-
-```javascript
-slimbot.sendMessage('123456789', 'hello');
-
-let optionalParams = {
-  parse_mode: "markdown",
-  disable_web_page_preview: true,
-  disable_notification: true,
-  reply_to_message_id: 1234,
-  reply_markup: JSON.stringify({
-    inline_keyboard: [[
-      { text: 'Today', callback_data: 'pick_today' },
-      { text: 'Pick a date', callback_data: 'pick_date' }
-    ]]
-  })
-}
-
-slimbot.sendMessage('123456789', 'hello', optionalParams);
-```
-
-### Sending files
-
-There are [3 ways](https://core.telegram.org/bots/api#sending-files) to send files:
-* Using a ```file_id``` when the the file already exists on Telegram's servers
-* Using a ```HTTP URL```
-* Uploading a file to Telegram's servers
-
-Check out the [full example](https://github.com/edisonchee/slimbot/blob/master/examples/sendFile.js) to learn how it works.
-
-```javascript
-const fs = require('fs');
-
-// Method 1
-slimbot.sendPhoto(chat_id, 'AgADBQADqacxG2gbbxCWBkgvcmeAgxVPyjIABBlug37DKyhDEU0AAgI');
-
-// Method 2
-slimbot.sendPhoto(chat_id, 'https://fbatwork.files.wordpress.com/2016/10/govtech-logo.jpg');
-
-// Method 3
-let inputFile = fs.createReadStream(__dirname + '/bulb.png');
-slimbot.sendPhoto(chat_id, inputFile).then(message => {
-  // once successful, you can grab the file_id of the file
-  console.log(message.result.photo[0].file_id);
-});
-```
-
-## Additional methods implemented
-These are actually convenience methods that use the same underlying ```editMessageText``` method in the [API](https://core.telegram.org/bots/api#editmessagetext).
-* editInlineMessageText
-* editInlineMessageCaption
-* editInlineMessageReplyMarkup
-
-Call these additional methods with ```inline_message_id``` rather than ```chat_id``` and ```message_id```.
-
-```javascript
-// slimbot.editMessageText(chat_id, message_id, 'edited message');
-slimbot.editMessageText('123456789', 1234, 'edited message');
-
-// slimbot.editInlineMessageText(inline_message_id, 'edited message');
-slimbot.editInlineMessageText('4321', 'edited message');
-```
-
-## Webhook
-If you're familiar with the Telegram Bot API, you'd have realised by now that this library defaults to using ```getUpdates``` for simplicity and ease of use.
-
-Assuming you already have a domain name with SSL:
-```javascript
-const Slimbot = require('slimbot');
-const slimbot = new Slimbot(process.env['TELEGRAM_TOKEN']);
-
-// Register listeners
-
-slimbot.on('message', message => {
-  slimbot.sendMessage(message.chat.id, 'Message received');
-});
-
-// Setup webhook integration
-slimbot.setWebhook('https://www.example.com');
-
-// Get webhook status
-slimbot.getWebhookInfo();
-
-// Teardown webhook integration
-slimbot.deleteWebhook();
-```
