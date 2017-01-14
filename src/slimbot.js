@@ -36,7 +36,7 @@ class Slimbot extends Telegram(EventEmitter) {
     });
   }
 
-  startPolling() {
+  startPolling(callback) {
     this._offset++;
     return super.getUpdates(this._offset)
     .then(updates => {
@@ -44,8 +44,16 @@ class Slimbot extends Telegram(EventEmitter) {
         this._processUpdates(updates);
       }
     })
+    .catch(error => {
+      if (callback) {
+        callback(error);
+      }
+      else {
+        throw error;
+      }
+    })
     .finally(() => {
-      setTimeout(() => this.startPolling(), 3000);
+      setTimeout(() => this.startPolling(callback), 100);
     });
   }
 }
