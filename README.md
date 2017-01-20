@@ -41,9 +41,27 @@ Now go ahead and type a message to your bot in Telegram. It should reply you wit
 All methods return a promise. This means you can inspect the returned [objects](https://core.telegram.org/bots/api#available-types) if you want to:
 
 ```javascript
-slimbot.sendMessage('123456789', 'Message received').then(message => {
-  console.log(message);
-});
+slimbot.sendMessage('123456789', 'Message received')
+  .then(message => {
+    console.log(message);
+  });
 ```
 
 In this case, the ```sendMessage``` method returns a [Message](https://core.telegram.org/bots/api#message) object as stated in the [documentation](https://core.telegram.org/bots/api#sendmessage).
+
+## Examples
+
+* [Simple Usage](https://github.com/edisonchee/slimbot/blob/master/examples/simpleUsage.js)
+* [Sending Files](https://github.com/edisonchee/slimbot/blob/master/examples/sendFile.js)
+* [Inline Keyboards](https://github.com/edisonchee/slimbot/blob/master/examples/inlineKeyboard.js)
+* [Inline Queries](https://github.com/edisonchee/slimbot/blob/master/examples/inlineQuery.js)
+
+## Documentation ([Wiki](https://github.com/edisonchee/slimbot/wiki))
+
+Learn more about the implementation details in the [Wiki](https://github.com/edisonchee/slimbot/wiki). Feel free to contribute to the Wiki or add more examples.
+
+## Contributing
+
+The guiding principle for this library is to be as simple as possible. I put serious thought into adding features to guard against bloat. Nonetheless, I am very open to dialogue and contributions are most welcome.
+
+If you have built a public bot using this library, send me a PM and I'll feature it here.
