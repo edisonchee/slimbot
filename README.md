@@ -49,6 +49,28 @@ slimbot.sendMessage('123456789', 'Message received')
 
 In this case, the ```sendMessage``` method returns a [Message](https://core.telegram.org/bots/api#message) object as stated in the [documentation](https://core.telegram.org/bots/api#sendmessage).
 
+You can also use callbacks instead of promises:
+
+```javascript
+const Slimbot = require('./src/slimbot');
+const slimbot = new Slimbot(process.env['TELEGRAM_BOT_TOKEN']);
+
+function callback(err, obj) {
+  if (err) {
+    // handle error
+    console.log(obj);
+  }
+  // handle returned object
+  console.log(obj);
+};
+
+slimbot.on('message', message => {
+  slimbot.sendMessage(message.chat.id, 'Message received', callback);
+});
+
+slimbot.startPolling(callback);
+```
+
 ## Examples
 
 * [Simple Usage](https://github.com/edisonchee/slimbot/blob/master/examples/simpleUsage.js)
