@@ -14,7 +14,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
     if (arguments.length === 0 || typeof arguments[0] !== 'string') {
       throw new Error('Please provide method as a string');
     }
-    
+
     // the 2nd, 3rd or 4th argument could be a callback
     let callback;
     if (typeof arguments[3] == 'function') {
@@ -208,7 +208,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       inline_query_id: inlineQueryId,
       results: results
     };
-    
+
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
     }
@@ -364,6 +364,28 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('sendVoice', params, callback);
+  }
+
+  sendVideoNote(chatId, videoNote, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      video_note: videoNote
+    };
+
+    let formData = {
+      video_note: videoNote
+    };
+
+    // write test for file size limit
+    // write test for file size type (only .ogg encoded in OPUS)
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('sendVideoNote', params, callback);
   }
 
   sendLocation(chatId, lat, lon, optionalParams, callback) {
