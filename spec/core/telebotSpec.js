@@ -166,6 +166,18 @@ describe('Slimbot', () => {
         expect(payload).toEqual('shipping_query');
       });
 
+      it('should emit "pre_checkout_query" if update is of type "pre_checkout_query"', () => {
+        slimbot.on('pre_checkout_query', data => {
+          if (data !== undefined) {
+            flag = true;
+            payload = data;
+          };
+        });
+        slimbot._processUpdates(updates);
+        expect(flag).toEqual(true);
+        expect(payload).toEqual('pre_checkout_query');
+      });
+
     });
   });
 

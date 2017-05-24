@@ -18,6 +18,7 @@ class Slimbot extends Telegram(EventEmitter) {
       let inlineQuery = update.inline_query;
       let chosenInlineResult = update.chosen_inline_result;
       let shippingQuery = update.shipping_query;
+      let preCheckoutQuery = update.pre_checkout_query;
 
       if (message) {
         this.emit('message', message);
@@ -35,6 +36,8 @@ class Slimbot extends Telegram(EventEmitter) {
         this.emit('chosen_inline_result', chosenInlineResult);
       } else if (shippingQuery) {
         this.emit('shipping_query', shippingQuery);
+      } else if (preCheckoutQuery) {
+        this.emit('pre_checkout_query', preCheckoutQuery)
       }
     });
   }
