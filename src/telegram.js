@@ -563,6 +563,16 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('answerShippingQuery', params, callback);
   }
 
+  answerPreCheckoutQuery(preCheckoutQueryId, ok, errorMessage) {
+    let params = {
+      pre_checkout_query_id: preCheckoutQueryId,
+      ok: ok,
+      error_message: errorMessage
+    };
+
+    return this._request('answerShippingQuery', params, callback);
+  }
+
   // Games
 
   sendGame(chatId, gameShortName, optionalParams, callback) {
