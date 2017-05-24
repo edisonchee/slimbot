@@ -203,6 +203,15 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('editMessageReplyMarkup', params, callback);
   }
 
+  deleteMessage(chatId, messageId) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId
+    }
+
+    return this._request('deleteMessage', params, callback);
+  }
+
   answerInlineQuery(inlineQueryId, results, optionalParams, callback) {
     let params = {
       inline_query_id: inlineQueryId,
