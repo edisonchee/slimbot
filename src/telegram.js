@@ -19,12 +19,10 @@ const Telegram = EventEmitter => class extends EventEmitter {
     let callback;
     if (typeof arguments[3] == 'function') {
       callback = arguments[3];
-    }
-    else if (typeof arguments[2] == 'function') {
+    } else if (typeof arguments[2] == 'function') {
       callback = arguments[2];
       formData = null;
-    }
-    else if (typeof arguments[1] == 'function') {
+    } else if (typeof arguments[1] == 'function') {
       callback = arguments[1];
       params = null;
     }
@@ -95,8 +93,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams, callback);
     }
 
@@ -110,8 +107,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -127,8 +123,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -143,8 +138,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -160,8 +154,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -176,8 +169,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -220,8 +212,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -237,8 +228,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -257,8 +247,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -279,8 +268,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -301,8 +289,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -321,8 +308,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -344,8 +330,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -367,8 +352,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -406,8 +390,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -425,8 +408,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -442,8 +424,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -470,8 +451,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -545,6 +525,29 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('getChatMember', params, callback);
   }
 
+  // Payment
+
+  sendInvoice(chatId, title, description, payload, providerToken, startParameter, currency, prices, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      title: title,
+      description: description,
+      payload: payload,
+      provider_token: providerToken,
+      start_parameter: startParameter,
+      currency: currency,
+      prices: prices
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('sendInvoice', params, callback);
+  }
+
   // Games
 
   sendGame(chatId, gameShortName, optionalParams, callback) {
@@ -555,8 +558,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -571,8 +573,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
@@ -586,8 +587,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
-    }
-    else {
+    } else {
       Object.assign(params, optionalParams);
     }
 
