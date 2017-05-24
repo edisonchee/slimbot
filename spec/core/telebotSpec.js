@@ -63,7 +63,9 @@ describe('Slimbot', () => {
             { edited_channel_post: 'edited_channel_post' },
             { callback_query: 'callback_query' },
             { inline_query: 'inline_query' },
-            { chosen_inline_result: 'chosen_inline_result' }
+            { chosen_inline_result: 'chosen_inline_result' },
+            { shipping_query: 'shipping_query' },
+            { pre_checkout_query: 'pre_checkout_query' }
           ]
         };
       });
@@ -150,6 +152,18 @@ describe('Slimbot', () => {
         slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('chosen_inline_result');
+      });
+
+      it('should emit "shipping_query" if update is of type "shipping_query"', () => {
+        slimbot.on('shipping_query', data => {
+          if (data !== undefined) {
+            flag = true;
+            payload = data;
+          };
+        });
+        slimbot._processUpdates(updates);
+        expect(flag).toEqual(true);
+        expect(payload).toEqual('shipping_query');
       });
 
     });
