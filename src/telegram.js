@@ -338,6 +338,28 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('uploadStickerFile', params, formData, callback);
   }
 
+  createNewStickerSet(userId, name, title, pngFile, emojis, optionalParams, callback) {
+    let params = {
+      user_id: userId,
+      name: name,
+      title: title,
+      png_sticker: pngFile,
+      emojis: emojis
+    };
+
+    let formData = {
+      png_sticker: pngFile
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('createNewStickerSet', params, formData, callback);
+  }
+
   sendVideo(chatId, video, optionalParams, callback) {
     let params = {
       chat_id: chatId,
