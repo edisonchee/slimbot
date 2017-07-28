@@ -30,10 +30,10 @@
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
-    "eslint": "^3.19.0",
+    "eslint": "^4.3.0",
     "istanbul": "^0.4.5",
     "jasmine": "^2.6.0",
-    "mockery": "^2.0.0"
+    "mockery": "^2.1.0"
   },
   "bugs": {
     "url": "https://github.com/edisonchee/slimbot/issues"
