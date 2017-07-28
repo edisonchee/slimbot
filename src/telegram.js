@@ -566,6 +566,15 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('setChatTitle', params, callback);
   }
 
+  setChatDescription(chatId, description, callback) {
+    let params = {
+      chat_id: chatId,
+      description: description
+    }
+
+    return this._request('setChatDescription', params, callback);
+  }
+
   getChat(chatId, callback) {
     let params = {
       chat_id: chatId
