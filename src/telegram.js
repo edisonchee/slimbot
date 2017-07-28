@@ -549,6 +549,14 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('setChatPhoto', params, formData, callback);
   }
 
+  deleteChatPhoto(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('deleteChatPhoto', params, callback);
+  }
+
   getChat(chatId, callback) {
     let params = {
       chat_id: chatId
