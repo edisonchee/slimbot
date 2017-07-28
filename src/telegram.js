@@ -528,6 +528,14 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('promoteChatMember', params, callback);
   }
 
+  exportChatInviteLink(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('exportChatInviteLink', params, callback);
+  }
+
   getChat(chatId, callback) {
     let params = {
       chat_id: chatId
