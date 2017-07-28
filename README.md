@@ -7,7 +7,7 @@
 
 A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
-Updated for [Bot API 3.0](https://core.telegram.org/bots/api#may-18-2017), introducing the new Payment platform.
+Updated for [Bot API 3.2](https://core.telegram.org/bots/api#july-21-2017), allowing your bot to police chat groups and handle stickers/sticker sets.
 
 ## Resources
 * [Telegram Bot API Documentation](https://core.telegram.org/bots/api)
