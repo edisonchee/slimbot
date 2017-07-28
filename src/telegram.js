@@ -466,11 +466,17 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('getFile', params, callback);
   }
 
-  kickChatMember(chatId, userId, callback) {
+  kickChatMember(chatId, userId, optionalParams, callback) {
     let params = {
       chat_id: chatId,
       user_id: userId
     };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
 
     return this._request('kickChatMember', params, callback);
   }
