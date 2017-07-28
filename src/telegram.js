@@ -296,6 +296,8 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('sendDocument', params, formData, callback);
   }
 
+  // Stickers
+
   sendSticker(chatId, sticker, optionalParams, callback) {
     let params = {
       chat_id: chatId,
@@ -313,6 +315,87 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('sendSticker', params, formData, callback);
+  }
+
+  getStickerSet(name, callback) {
+    let params = {
+      name: name
+    }
+
+    return this._request('getStickerSet', params, callback);
+  }
+
+  uploadStickerFile(userId, pngFile, callback) {
+    let params = {
+      user_id: userId,
+      png_sticker: pngFile
+    };
+
+    let formData = {
+      png_sticker: pngFile
+    };
+
+    return this._request('uploadStickerFile', params, formData, callback);
+  }
+
+  createNewStickerSet(userId, name, title, pngFile, emojis, optionalParams, callback) {
+    let params = {
+      user_id: userId,
+      name: name,
+      title: title,
+      png_sticker: pngFile,
+      emojis: emojis
+    };
+
+    let formData = {
+      png_sticker: pngFile
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('createNewStickerSet', params, formData, callback);
+  }
+
+  addStickerToSet(userId, name, pngFile, emojis, optionalParams, callback) {
+    let params = {
+      user_id: userId,
+      name: name,
+      png_sticker: pngFile,
+      emojis: emojis
+    };
+
+    let formData = {
+      png_sticker: pngFile
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('addStickerToSet', params, formData, callback);
+  }
+
+  setStickerPositionInSet(sticker, position, callback) {
+    let params = {
+      sticker: sticker,
+      position: position
+    }
+
+    return this._request('setStickerPositionInSet', params, callback);
+  }
+
+  deleteStickerFromSet(sticker, callback) {
+    let params = {
+      sticker: sticker
+    }
+
+    return this._request('deleteStickerFromSet', params, callback);
   }
 
   sendVideo(chatId, video, optionalParams, callback) {
@@ -466,11 +549,17 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('getFile', params, callback);
   }
 
-  kickChatMember(chatId, userId, callback) {
+  kickChatMember(chatId, userId, optionalParams, callback) {
     let params = {
       chat_id: chatId,
       user_id: userId
     };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
 
     return this._request('kickChatMember', params, callback);
   }
@@ -490,6 +579,106 @@ const Telegram = EventEmitter => class extends EventEmitter {
     };
 
     return this._request('unbanChatMember', params, callback);
+  }
+
+  restrictChatMember(chatId, userId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      user_id: userId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('restrictChatMember', params, callback);
+  }
+
+  promoteChatMember(chatId, userId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      user_id: userId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('promoteChatMember', params, callback);
+  }
+
+  exportChatInviteLink(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('exportChatInviteLink', params, callback);
+  }
+
+  setChatPhoto(chatId, photo, callback) {
+    let params = {
+      chat_id: chatId,
+      photo: photo
+    };
+
+    let formData = {
+      photo: photo
+    };
+
+    return this._request('setChatPhoto', params, formData, callback);
+  }
+
+  deleteChatPhoto(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('deleteChatPhoto', params, callback);
+  }
+
+  setChatTitle(chatId, title, callback) {
+    let params = {
+      chat_id: chatId,
+      title: title
+    }
+
+    return this._request('setChatTitle', params, callback);
+  }
+
+  setChatDescription(chatId, description, callback) {
+    let params = {
+      chat_id: chatId,
+      description: description
+    }
+
+    return this._request('setChatDescription', params, callback);
+  }
+
+  pinChatMessage(chatId, messageId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      message: messageId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('pinChatMessage', params, callback);
+  }
+
+  unpinChatMessage(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('unpinChatMessage', params, callback);
   }
 
   getChat(chatId, callback) {
