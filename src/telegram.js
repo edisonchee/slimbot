@@ -381,6 +381,23 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('addStickerToSet', params, formData, callback);
   }
 
+  setStickerPositionInSet(sticker, position, callback) {
+    let params = {
+      sticker: sticker,
+      position: position
+    }
+
+    return this._request('setStickerPositionInSet', params, callback);
+  }
+
+  deleteStickerFromSet(sticker, callback) {
+    let params = {
+      sticker: sticker
+    }
+
+    return this._request('deleteStickerFromSet', params, callback);
+  }
+
   sendVideo(chatId, video, optionalParams, callback) {
     let params = {
       chat_id: chatId,
