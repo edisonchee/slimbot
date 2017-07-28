@@ -536,6 +536,19 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('exportChatInviteLink', params, callback);
   }
 
+  setChatPhoto(chatId, photo, callback) {
+    let params = {
+      chat_id: chatId,
+      photo: photo
+    };
+
+    let formData = {
+      photo: photo
+    };
+
+    return this._request('setChatPhoto', params, formData, callback);
+  }
+
   getChat(chatId, callback) {
     let params = {
       chat_id: chatId
