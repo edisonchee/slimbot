@@ -1,6 +1,6 @@
 {
   "name": "slimbot",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "Simple and minimal Telegram Bot API for Node.js. No frills.",
   "author": "Edison Chee <edisonchee@live.com>",
   "repository": {
@@ -16,7 +16,7 @@
     "nodejs"
   ],
   "engines": {
-    "node": "^8.2.1"
+    "node": "^8.3.0"
   },
   "license": "MIT",
   "scripts": {
@@ -30,9 +30,9 @@
   },
   "devDependencies": {
     "coveralls": "^2.13.1",
-    "eslint": "^4.3.0",
+    "eslint": "^4.4.1",
     "istanbul": "^0.4.5",
-    "jasmine": "^2.6.0",
+    "jasmine": "^2.7.0",
     "mockery": "^2.1.0"
   },
   "bugs": {
