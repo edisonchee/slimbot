@@ -7,7 +7,7 @@
 
 A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
-Updated for [Bot API 3.2](https://core.telegram.org/bots/api#july-21-2017), allowing your bot to police chat groups and handle stickers/sticker sets.
+Updated for [Bot API 3.3](https://core.telegram.org/bots/api#august-23-2017).
 
 ## Resources
 * [Telegram Bot API Documentation](https://core.telegram.org/bots/api)

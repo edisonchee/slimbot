@@ -195,7 +195,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('editMessageReplyMarkup', params, callback);
   }
 
-  deleteMessage(chatId, messageId) {
+  deleteMessage(chatId, messageId, callback) {
     let params = {
       chat_id: chatId,
       message_id: messageId
@@ -737,7 +737,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('sendInvoice', params, callback);
   }
 
-  answerShippingQuery(shippingQueryId, ok) {
+  answerShippingQuery(shippingQueryId, ok, callback) {
     let params = {
       shipping_query_id: shippingQueryId,
       ok: ok
