@@ -480,6 +480,39 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('sendLocation', params, callback);
   }
 
+  editMessageLiveLocation(chatId, messageId, lat, lon, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId,
+      latitude: lat,
+      longitude: lon
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('editMessageLiveLocation', params, callback);
+  }
+
+  editInlineMessageLiveLocation(inlineMessageId, lat, lon, optionalParams, callback) {
+    let params = {
+      inline_message_id: inlineMessageId,
+      latitude: lat,
+      longitude: lon
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('editMessageLiveLocation', params, callback);
+  }
+
   sendVenue(chatId, lat, lon, title, address, optionalParams, callback) {
     let params = {
       chat_id: chatId,
