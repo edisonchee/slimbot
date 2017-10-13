@@ -513,6 +513,35 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('editMessageLiveLocation', params, callback);
   }
 
+  stopMessageLiveLocation(chatId, messageId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('stopMessageLiveLocation', params, callback);
+  }
+
+  stopInlineMessageLiveLocation(inlineMessageId, optionalParams, callback) {
+    let params = {
+      inline_message_id: inlineMessageId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('stopMessageLiveLocation', params, callback);
+  }
+
   sendVenue(chatId, lat, lon, title, address, optionalParams, callback) {
     let params = {
       chat_id: chatId,
