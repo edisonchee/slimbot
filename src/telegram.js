@@ -714,6 +714,23 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('getChatMember', params, callback);
   }
 
+  setChatStickerSet(chatId, stickerSetName, callback) {
+    let params = {
+      chat_id: chatId,
+      sticker_set_name: stickerSetName
+    }
+
+    return this._request('setChatStickerSet', params, callback);
+  }
+
+  deleteChatStickerSet(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('deleteChatStickerSet', params, callback);
+  }
+
   // Payment
 
   sendInvoice(chatId, title, description, payload, providerToken, startParameter, currency, prices, optionalParams, callback) {
