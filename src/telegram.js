@@ -1,3 +1,4 @@
+'use strict';
 const EventEmitter = require('eventemitter3');
 const Request = require('request-promise');
 
@@ -49,6 +50,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
         return updates;
       }
+      return null;
     })
     .catch(error => {
       if (callback) {
