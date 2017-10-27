@@ -38,6 +38,8 @@ slimbot.startPolling();
 
 Now go ahead and type a message to your bot in Telegram. It should reply you with 'Message received' in the chat.
 
+## How it works
+
 All methods return a promise. This means you can inspect the returned [objects](https://core.telegram.org/bots/api#available-types) if you want to:
 
 ```javascript
