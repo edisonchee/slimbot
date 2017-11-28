@@ -466,6 +466,21 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('sendVideoNote', params, callback);
   }
 
+  sendMediaGroup(chatId, media, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      media: media
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('sendMediaGroup', params, callback);
+  }
+
   sendLocation(chatId, lat, lon, optionalParams, callback) {
     let params = {
       chat_id: chatId,
