@@ -740,7 +740,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
   pinChatMessage(chatId, messageId, optionalParams, callback) {
     let params = {
       chat_id: chatId,
-      message: messageId
+      message_id: messageId
     }
 
     if (typeof optionalParams == 'function') {
