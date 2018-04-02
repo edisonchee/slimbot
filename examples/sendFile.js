@@ -23,7 +23,7 @@ slimbot.on('message', (message) => {
   });
 
   // Method 3: Uploading a file to Telegram's servers
-  slimbot.sendPhoto(message.chat.id, inputFile).then(message => {
+  slimbot.sendPhoto(message.chat.id, fileUpload).then(message => {
     console.log(message.result.photo);
   });
 });
