@@ -9,7 +9,7 @@ slimbot.on('message', message => {
 
 slimbot.on('edited_message', edited_message => {
   // reply when user edits a message
-  slimbot.sendMessage(message.chat.id, 'Message edited');
+  slimbot.sendMessage(edited_message.chat.id, 'Message edited');
 });
 
 // Call API
