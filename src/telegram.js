@@ -46,7 +46,9 @@ const Telegram = EventEmitter => class extends EventEmitter {
       let updates = JSON.parse(resp.body);
 
       if (updates.ok) {
-        callback && callback(null, updates);
+        if (callback) { 
+          callback(null, updates);
+        }
 
         return updates;
       }
