@@ -6,12 +6,12 @@ const Telegram = require('./telegram');
 class Slimbot extends Telegram(EventEmitter) {
   constructor(token) {
     super(token);
-    this._offset = 0;
+    this._offset = undefined;
   }
 
   _processUpdates(updates) {
     updates.result.forEach(update => {
-      this._offset = update.update_id;
+      this._offset = update.update_id + 1;
       let message = update.message;
       let editedMessage = update.edited_message;
       let channelPost = update.channel_post;
@@ -45,7 +45,6 @@ class Slimbot extends Telegram(EventEmitter) {
   }
 
   startPolling(callback) {
-    this._offset++;
     return super.getUpdates(this._offset)
     .then(updates => {
       if (updates !== undefined) {
