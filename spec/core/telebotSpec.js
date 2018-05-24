@@ -57,17 +57,22 @@ describe('Slimbot', () => {
       beforeEach(() => {
         updates = {
           result: [
-            { message: 'message' },
-            { edited_message: 'edited_message' },
-            { channel_post: 'channel_post' },
-            { edited_channel_post: 'edited_channel_post' },
-            { callback_query: 'callback_query' },
-            { inline_query: 'inline_query' },
-            { chosen_inline_result: 'chosen_inline_result' },
-            { shipping_query: 'shipping_query' },
-            { pre_checkout_query: 'pre_checkout_query' }
+            { update_id: 1000, message: 'message' },
+            { update_id: 1001, edited_message: 'edited_message' },
+            { update_id: 1002, channel_post: 'channel_post' },
+            { update_id: 1003, edited_channel_post: 'edited_channel_post' },
+            { update_id: 1004, callback_query: 'callback_query' },
+            { update_id: 1005, inline_query: 'inline_query' },
+            { update_id: 1006, chosen_inline_result: 'chosen_inline_result' },
+            { update_id: 1007, shipping_query: 'shipping_query' },
+            { update_id: 1008, pre_checkout_query: 'pre_checkout_query' }
           ]
         };
+      });
+
+      it('should take the id of last update increased by 1 as offset', () => {
+        slimbot._processUpdates(updates);
+        expect(slimbot._offset).toEqual(1009);
       });
 
       it('should emit "message" if update is of type "message"', () => {
@@ -184,11 +189,6 @@ describe('Slimbot', () => {
   // Slimbot API methods
 
   describe('startPolling', () => {
-    it('should increase offset by 1', () => {
-      slimbot.startPolling();
-      expect(0 < slimbot._offset).toEqual(true);
-    });
-
     it('should call slimbot._request', () => {
       spyOn(slimbot, '_request').and.returnValue(Bluebird.resolve());
       slimbot.startPolling();
