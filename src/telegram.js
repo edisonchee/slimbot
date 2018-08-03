@@ -180,6 +180,37 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('editMessageCaption', params, callback);
   }
 
+  editMessageMedia(chatId, messageId, media, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId,
+      media: media
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('editMessageMedia', params, callback);
+  }
+
+  editInlineMessageMedia(inlineMessageId, media, optionalParams, callback) {
+    let params = {
+      inline_message_id: inlineMessageId,
+      media: media
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('editMessageMedia', params, callback);
+  }
+
   editMessageReplyMarkup(chatId, messageId, replyMarkup, callback) {
     let params = {
       chat_id: chatId,
