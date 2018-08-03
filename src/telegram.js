@@ -331,6 +331,25 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('sendDocument', params, formData, callback);
   }
 
+  sendAnimation(chatId, animation, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      animation: animation
+    };
+
+    let formData = {
+      animation: animation
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('sendAnimation', params, formData, callback);
+  }
+
   // Stickers
 
   sendSticker(chatId, sticker, optionalParams, callback) {
