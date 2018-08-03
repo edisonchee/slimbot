@@ -7,7 +7,7 @@
 
 A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
-Updated for [Bot API 3.6](https://core.telegram.org/bots/api#february-13-2018).
+Updated for [Bot API 4.0](https://core.telegram.org/bots/api#july-26-2018).
 
 ## Resources
 * [Telegram Bot API Documentation](https://core.telegram.org/bots/api)
