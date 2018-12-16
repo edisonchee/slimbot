@@ -27,7 +27,8 @@
     "bluebird": "^3.5.3",
     "eventemitter3": "^3.1.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "socks5-https-client": "^1.2.1"
   },
   "devDependencies": {
     "coveralls": "^3.0.2",
