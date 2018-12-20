@@ -16,7 +16,7 @@
     "nodejs"
   ],
   "engines": {
-    "node": "^11.4.0"
+    "node": "^11.5.0"
   },
   "license": "MIT",
   "scripts": {
