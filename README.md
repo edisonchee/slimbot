@@ -79,7 +79,7 @@ slimbot.startPolling(callback);
 * [Sending Files](https://github.com/edisonchee/slimbot/blob/master/examples/sendFile.js)
 * [Inline Keyboards](https://github.com/edisonchee/slimbot/blob/master/examples/inlineKeyboard.js)
 * [Inline Queries](https://github.com/edisonchee/slimbot/blob/master/examples/inlineQuery.js)
-* [Socks5 proxy support](./examples/simpleUsageWithProxy.js)
+* [Socks5 proxy support](./examples/simpleUsageWithProxy.js) Thanks to @lgg for adding this feature! Merged into the public repo in [PR #27](https://github.com/edisonchee/slimbot/pull/27)
 
 ## Documentation ([Wiki](https://github.com/edisonchee/slimbot/wiki))
 
