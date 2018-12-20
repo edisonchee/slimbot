@@ -1,14 +1,19 @@
 'use strict';
 const EventEmitter = require('eventemitter3');
 const Request = require('request-promise');
+const Agent = require('socks5-https-client/lib/Agent');
 
 const Telegram = EventEmitter => class extends EventEmitter {
-  constructor(token) {
+  constructor(token, proxy) {
     super();
     if (token === undefined) {
       throw new Error('Please provide a Telegram bot token when instantiating');
     }
     this._token = token;
+    if(proxy !== undefined){
+      this._useProxy = true;
+      this._proxy = proxy;
+    }
   }
 
   _request(method, params, formData) {
@@ -36,6 +41,19 @@ const Telegram = EventEmitter => class extends EventEmitter {
       resolveWithFullResponse: true,
       forever: true
     };
+
+    if(this._useProxy){
+      options.strictSSL = true;
+      options.agentClass = Agent;
+      options.agentOptions = {
+        socksHost: this._proxy.socksHost,
+        socksPort: this._proxy.socksPort
+      };
+      if(this._proxy.socksUsername && this._proxy.socksPassword){
+        options.agentOptions.socksUsername = this._proxy.socksUsername;
+        options.agentOptions.socksPassword = this._proxy.socksPassword;
+      }
+    }
 
     return Request(options)
     .then(resp => {
