@@ -2,6 +2,7 @@
 const EventEmitter = require('eventemitter3');
 const Request = require('request-promise');
 const Agent = require('socks5-https-client/lib/Agent');
+const Stream = require('stream');
 
 const Telegram = EventEmitter => class extends EventEmitter {
   constructor(token, proxy) {
@@ -289,14 +290,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   sendPhoto(chatId, photo, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      photo: photo
-    };
-
-    let formData = {
-      photo: photo
-    };
+    let params;
+    let formData;
+  
+    if (isReadableStream(photo)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        photo: photo
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        photo: photo
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -308,16 +317,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   sendAudio(chatId, audio, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      audio: audio
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      audio: audio
-    };
-
-    // write test for file size limit
+    if (isReadableStream(audio)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        audio: audio
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        audio: audio
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -329,16 +344,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   sendDocument(chatId, document, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      document: document
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      document: document
-    };
-
-    // write test for file size limit
+    if (isReadableStream(document)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        document: document
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        document: document
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -350,14 +371,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   sendAnimation(chatId, animation, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      animation: animation
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      animation: animation
-    };
+    if (isReadableStream(animation)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        animation: animation
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        animation: animation
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -371,14 +400,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   // Stickers
 
   sendSticker(chatId, sticker, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      sticker: sticker
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      sticker: sticker
-    };
+    if (isReadableStream(sticker)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        sticker: sticker
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        sticker: sticker
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -400,7 +437,6 @@ const Telegram = EventEmitter => class extends EventEmitter {
   uploadStickerFile(userId, pngFile, callback) {
     let params = {
       user_id: userId,
-      png_sticker: pngFile
     };
 
     let formData = {
@@ -411,17 +447,28 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   createNewStickerSet(userId, name, title, pngFile, emojis, optionalParams, callback) {
-    let params = {
-      user_id: userId,
-      name: name,
-      title: title,
-      png_sticker: pngFile,
-      emojis: emojis
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      png_sticker: pngFile
-    };
+    if (isReadableStream(pngFile)) {
+      params = {
+        user_id: userId,
+        name: name,
+        title: title,
+        emojis: emojis
+      };
+      formData = {
+        png_sticker: pngFile
+      };
+    } else {
+      params = {
+        user_id: userId,
+        name: name,
+        title: title,
+        png_sticker: pngFile,
+        emojis: emojis
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -433,16 +480,26 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   addStickerToSet(userId, name, pngFile, emojis, optionalParams, callback) {
-    let params = {
-      user_id: userId,
-      name: name,
-      png_sticker: pngFile,
-      emojis: emojis
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      png_sticker: pngFile
-    };
+    if (isReadableStream(pngFile)) {
+      params = {
+        user_id: userId,
+        name: name,
+        emojis: emojis
+      };
+      formData = {
+        png_sticker: pngFile
+      };
+    } else {
+      params = {
+        user_id: userId,
+        name: name,
+        png_sticker: pngFile,
+        emojis: emojis
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -471,17 +528,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   sendVideo(chatId, video, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      video: video
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      video: video
-    };
-
-    // write test for file size limit
-    // write test for file size type (only .mp4)
+    if (isReadableStream(video)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        video: video
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        video: video
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -489,21 +551,26 @@ const Telegram = EventEmitter => class extends EventEmitter {
       Object.assign(params, optionalParams);
     }
 
-    return this._request('sendVideo', params, callback);
+    return this._request('sendVideo', params, formData, callback);
   }
 
   sendVoice(chatId, voice, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      voice: voice
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      voice: voice
-    };
-
-    // write test for file size limit
-    // write test for file size type (only .ogg encoded in OPUS)
+    if (isReadableStream(voice)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        voice: voice
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        voice: voice
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -511,21 +578,26 @@ const Telegram = EventEmitter => class extends EventEmitter {
       Object.assign(params, optionalParams);
     }
 
-    return this._request('sendVoice', params, callback);
+    return this._request('sendVoice', params, formData, callback);
   }
 
   sendVideoNote(chatId, videoNote, optionalParams, callback) {
-    let params = {
-      chat_id: chatId,
-      video_note: videoNote
-    };
+    let params;
+    let formData;
 
-    let formData = {
-      video_note: videoNote
-    };
-
-    // write test for file size limit
-    // write test for file size type (only .ogg encoded in OPUS)
+    if (isReadableStream(videoNote)) {
+      params = {
+        chat_id: chatId
+      };
+      formData = {
+        video_note: videoNote
+      };
+    } else {
+      params = {
+        chat_id: chatId,
+        video_note: videoNote
+      };
+    }
 
     if (typeof optionalParams == 'function') {
       callback = optionalParams;
@@ -533,7 +605,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
       Object.assign(params, optionalParams);
     }
 
-    return this._request('sendVideoNote', params, callback);
+    return this._request('sendVideoNote', params, formData, callback);
   }
 
   sendMediaGroup(chatId, media, optionalParams, callback) {
@@ -770,8 +842,7 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
   setChatPhoto(chatId, photo, callback) {
     let params = {
-      chat_id: chatId,
-      photo: photo
+      chat_id: chatId
     };
 
     let formData = {
@@ -973,6 +1044,12 @@ const Telegram = EventEmitter => class extends EventEmitter {
 
     return this._request('getGameHighScores', params, callback);
   }
+}
+
+function isReadableStream(object) {
+  return object instanceof Stream.Stream &&
+    typeof object._read === "function" &&
+    typeof object._readableState === "object"
 }
 
 module.exports = Telegram;
