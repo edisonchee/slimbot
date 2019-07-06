@@ -7,8 +7,8 @@
 
 A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
-Updated for [Bot API 4.1](https://core.telegram.org/bots/api#august-27-2018).
-Works with [Node 11.12.0](https://github.com/nodejs/node/releases/tag/v11.12.0).
+Updated for [Bot API 4.2](https://core.telegram.org/bots/api#may-31-2019).
+Works with [Node 12.6.0](https://github.com/nodejs/node/releases/tag/v12.6.0).
 
 ## Resources
 * [Release Notes](https://github.com/edisonchee/slimbot/releases)
