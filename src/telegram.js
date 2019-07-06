@@ -397,6 +397,39 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('sendAnimation', params, formData, callback);
   }
 
+  // Polls
+
+  sendPoll(chatId, question, pollOptions, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      question: question,
+      options: pollOptions
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams, callback);
+    }
+
+    return this._request('sendPoll', params, callback);
+  }
+
+  stopPoll(chatId, messageId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      message_id: messageId
+    };
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams, callback);
+    }
+
+    return this._request('stopPoll', params, callback);
+  }
+
   // Stickers
 
   sendSticker(chatId, sticker, optionalParams, callback) {
