@@ -203,5 +203,24 @@ describe('Slimbot', () => {
         done();
       });
     });
+
+    it('should store timeout object', done => {
+      spyOn(slimbot, '_request').and.returnValue(Bluebird.resolve({}));
+      spyOn(slimbot, '_processUpdates');
+      slimbot.startPolling().then(() => {
+        expect(slimbot._processUpdates).toHaveBeenCalled();
+        expect(slimbot._timeout).not.toBe(undefined);
+        done();
+      });
+    });
+  });
+
+  describe('stopPolling', () => {
+    it('should call slimbot.stopPolling', () => {
+      spyOn(slimbot, 'stopPolling');
+      slimbot.stopPolling();
+      expect(slimbot.stopPolling).toHaveBeenCalled();
+      expect(slimbot._timeout).toBe(undefined);
+    });
   });
 });

@@ -1,4 +1,4 @@
-const Slimbot = require('./src/slimbot');
+const Slimbot = require('slimbot');
 const slimbot = new Slimbot(process.env['TELEGRAM_BOT_TOKEN']);
 const fs = require('fs');
 

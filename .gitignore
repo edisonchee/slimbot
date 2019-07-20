@@ -42,3 +42,4 @@ coverage
 .npmignore
 yarn.lock
 .idea
+.coveralls.yml

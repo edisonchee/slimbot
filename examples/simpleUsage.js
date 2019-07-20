@@ -14,3 +14,9 @@ slimbot.on('edited_message', edited_message => {
 
 // Call API
 slimbot.startPolling();
+
+console.log('polling...');
+
+setTimeout(() => {
+  slimbot.stopPolling();
+}, 10000);

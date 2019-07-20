@@ -7,6 +7,7 @@ class Slimbot extends Telegram(EventEmitter) {
   constructor(token, proxy) {
     super(token, proxy);
     this._offset = undefined;
+    this._timeout = undefined;
   }
 
   _processUpdates(updates) {
@@ -61,8 +62,16 @@ class Slimbot extends Telegram(EventEmitter) {
       }
     })
     .finally(() => {
-      setTimeout(() => this.startPolling(callback), 100);
+      if (this._timeout) {
+        this._timeout.refresh();
+      } else {
+        this._timeout = setTimeout(() => this.startPolling(callback), 100);
+      }
     });
+  }
+
+  stopPolling() {
+    clearTimeout(this._timeout);
   }
 }
 
