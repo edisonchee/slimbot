@@ -1,4 +1,6 @@
 {
-    "extends": "airbnb",
-    "installedESLint": true
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+    }
 }

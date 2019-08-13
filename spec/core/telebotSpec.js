@@ -210,6 +210,7 @@ describe('Slimbot', () => {
       slimbot.startPolling().then(() => {
         expect(slimbot._processUpdates).toHaveBeenCalled();
         expect(slimbot._timeout).not.toBe(undefined);
+        expect(typeof slimbot._timeout.refresh).toBe('function');
         done();
       });
     });

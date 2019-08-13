@@ -62,7 +62,7 @@ class Slimbot extends Telegram(EventEmitter) {
       }
     })
     .finally(() => {
-      if (this._timeout) {
+      if (this._timeout && typeof this._timeout.refresh === 'function') {
         this._timeout.refresh();
       } else {
         this._timeout = setTimeout(() => this.startPolling(callback), 100);
