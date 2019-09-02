@@ -835,10 +835,11 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('unbanChatMember', params, callback);
   }
 
-  restrictChatMember(chatId, userId, optionalParams, callback) {
+  restrictChatMember(chatId, userId, permissions, optionalParams, callback) {
     let params = {
       chat_id: chatId,
-      user_id: userId
+      user_id: userId,
+      permissions: permissions
     }
 
     if (typeof optionalParams == 'function') {
@@ -863,6 +864,21 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('promoteChatMember', params, callback);
+  }
+
+  setChatPermissions(chatId, permissions, callback) {
+    let params = {
+      chat_id: chatId,
+      permissions: permissions
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('setChatPermissions', params, callback);
   }
 
   exportChatInviteLink(chatId, callback) {
