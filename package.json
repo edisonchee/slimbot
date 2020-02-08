@@ -35,7 +35,8 @@
     "eslint": "^6.8.0",
     "istanbul": "^0.4.5",
     "jasmine": "^3.5.0",
-    "mockery": "^2.1.0"
+    "mockery": "^2.1.0",
+    "handlebars": ">=4.3.0"
   },
   "bugs": {
     "url": "https://github.com/edisonchee/slimbot/issues"
