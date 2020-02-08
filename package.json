@@ -24,17 +24,17 @@
     "test": "istanbul cover jasmine --captureExceptions spec/core/*.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "dependencies": {
-    "bluebird": "^3.5.5",
+    "bluebird": "^3.7.2",
     "eventemitter3": "^4.0.0",
     "request": "^2.88.0",
-    "request-promise": "^4.2.4",
+    "request-promise": "^4.2.5",
     "socks5-https-client": "^1.2.1"
   },
   "devDependencies": {
-    "coveralls": "^3.0.6",
-    "eslint": "^6.3.0",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
     "istanbul": "^0.4.5",
-    "jasmine": "^3.4.0",
+    "jasmine": "^3.5.0",
     "mockery": "^2.1.0"
   },
   "bugs": {
