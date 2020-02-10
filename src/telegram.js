@@ -866,6 +866,16 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('promoteChatMember', params, callback);
   }
 
+  setChatAdministratorCustomTitle(chatId, userId, customTitle) {
+    let params = {
+      chat_id: chatId,
+      user_id: userId,
+      custom_title: customTitle
+    }
+
+    return this._request('setChatAdministratorCustomTitle', params, callback);
+  }
+
   setChatPermissions(chatId, permissions, callback) {
     let params = {
       chat_id: chatId,
