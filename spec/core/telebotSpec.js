@@ -65,14 +65,16 @@ describe('Slimbot', () => {
             { update_id: 1005, inline_query: 'inline_query' },
             { update_id: 1006, chosen_inline_result: 'chosen_inline_result' },
             { update_id: 1007, shipping_query: 'shipping_query' },
-            { update_id: 1008, pre_checkout_query: 'pre_checkout_query' }
+            { update_id: 1008, pre_checkout_query: 'pre_checkout_query' },
+            { update_id: 1009, poll: 'poll' },
+            { update_id: 1010, poll_answer: 'poll_answer' }
           ]
         };
       });
 
       it('should take the id of last update increased by 1 as offset', () => {
         slimbot._processUpdates(updates);
-        expect(slimbot._offset).toEqual(1009);
+        expect(slimbot._offset).toEqual(1011);
       });
 
       it('should emit "message" if update is of type "message"', () => {
@@ -181,6 +183,30 @@ describe('Slimbot', () => {
         slimbot._processUpdates(updates);
         expect(flag).toEqual(true);
         expect(payload).toEqual('pre_checkout_query');
+      });
+
+      it('should emit "poll" if update is of type "poll"', () => {
+        slimbot.on('poll', data => {
+          if (data !== undefined) {
+            flag = true;
+            payload = data;
+          };
+        });
+        slimbot._processUpdates(updates);
+        expect(flag).toEqual(true);
+        expect(payload).toEqual('poll');
+      });
+
+      it('should emit "poll_answer" if update is of type "poll_answer"', () => {
+        slimbot.on('poll_answer', data => {
+          if (data !== undefined) {
+            flag = true;
+            payload = data;
+          };
+        });
+        slimbot._processUpdates(updates);
+        expect(flag).toEqual(true);
+        expect(payload).toEqual('poll_answer');
       });
 
     });
