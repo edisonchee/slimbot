@@ -93,6 +93,9 @@ Learn more about the implementation details in the [Wiki](https://github.com/edi
 
 ## Contributing
 
+Heartfelt thanks to the following folks for making Slimbot better:
+[@lgg](https://github.com/lgg) [@ago](https://github.com/ago) [@rpaskin](https://github.com/rpaskin) [@matteocontrini](https://github.com/matteocontrini) [@jakimenko](https://github.com/jakimenko) [@nahanil](https://github.com/nahanil)
+
 The guiding principle for this library is to be as simple as possible. I put serious thought into adding features to guard against bloat. Nonetheless, I am very open to dialogue and contributions are most welcome.
 
 If you have built a public bot using this library, send me a PM and I'll feature it here.
