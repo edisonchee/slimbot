@@ -3,6 +3,7 @@ const EventEmitter = require('eventemitter3');
 const Request = require('request-promise');
 const Agent = require('socks5-https-client/lib/Agent');
 const Stream = require('stream');
+const Path = require('path');
 
 const Telegram = EventEmitter => class extends EventEmitter {
   constructor(token, proxy) {
@@ -135,6 +136,14 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('answerCallbackQuery', params, callback);
+  }
+
+  setMyCommands(commands, callback) {
+    return this._request('setMyCommands', commands, callback);
+  }
+
+  getMyCommands() {
+    return this._request('getMyCommands', callback);
   }
 
   editMessageText(chatId, messageId, text, optionalParams, callback) {
@@ -479,26 +488,42 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('uploadStickerFile', params, formData, callback);
   }
 
-  createNewStickerSet(userId, name, title, pngFile, emojis, optionalParams, callback) {
+  createNewStickerSet(userId, name, title, stickerFile, emojis, optionalParams, callback) {
     let params;
     let formData;
 
-    if (isReadableStream(pngFile)) {
-      params = {
-        user_id: userId,
-        name: name,
-        title: title,
-        emojis: emojis
-      };
-      formData = {
-        png_sticker: pngFile
-      };
+    if (isReadableStream(stickerFile)) {
+      // stickerFile is a readableStream, check extension
+      let ext = Path.extname(stickerFile.path);
+      
+      if (ext === '.png') {
+        params = {
+          user_id: userId,
+          name: name,
+          title: title,
+          emojis: emojis
+        };
+        formData = {
+          png_sticker: stickerFile
+        };
+      } else if (ext === '.tgs') {
+        params = {
+          user_id: userId,
+          name: name,
+          title: title,
+          emojis: emojis
+        };
+        formData = {
+          tgs_sticker: stickerFile
+        };
+      }
     } else {
+      // stickerFile is a string, either a file_id or HTTP URL
       params = {
         user_id: userId,
         name: name,
         title: title,
-        png_sticker: pngFile,
+        png_sticker: stickerFile,
         emojis: emojis
       };
     }
@@ -512,24 +537,39 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('createNewStickerSet', params, formData, callback);
   }
 
-  addStickerToSet(userId, name, pngFile, emojis, optionalParams, callback) {
+  addStickerToSet(userId, name, stickerFile, emojis, optionalParams, callback) {
     let params;
     let formData;
 
-    if (isReadableStream(pngFile)) {
-      params = {
-        user_id: userId,
-        name: name,
-        emojis: emojis
-      };
-      formData = {
-        png_sticker: pngFile
-      };
+    if (isReadableStream(stickerFile)) {
+      // stickerFile is a readableStream, check extension
+      let ext = Path.extname(stickerFile.path);
+
+      if (ext === '.png') {
+        params = {
+          user_id: userId,
+          name: name,
+          emojis: emojis
+        };
+        formData = {
+          png_sticker: stickerFile
+        };
+      } else if (ext === '.tgs') {
+        params = {
+          user_id: userId,
+          name: name,
+          emojis: emojis
+        };
+        formData = {
+          tgs_sticker: stickerFile
+        };
+      }
     } else {
+      // stickerFile is a string, either a file_id or HTTP URL
       params = {
         user_id: userId,
         name: name,
-        png_sticker: pngFile,
+        png_sticker: stickerFile,
         emojis: emojis
       };
     }
@@ -558,6 +598,43 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('deleteStickerFromSet', params, callback);
+  }
+
+  setStickerSetThumb(name, userId, thumbnailFile, callback) {
+    let params;
+    let formData;
+
+    if (isReadableStream(thumbnailFile)) {
+      // thumbnailFile is a readableStream, check extension
+      let ext = Path.extname(thumbnailFile.path);
+
+      if (ext === '.png') {
+        params = {
+          user_id: userId,
+          name: name
+        };
+        formData = {
+          thumb: thumbnailFile
+        };
+      } else if (ext === '.tgs') {
+        params = {
+          user_id: userId,
+          name: name
+        };
+        formData = {
+          thumb: thumbnailFile
+        };
+      }
+    } else {
+      // thumbnailFile is a string, either a file_id or HTTP URL
+      params = {
+        user_id: userId,
+        name: name,
+        thumb: thumbnailFile
+      };
+    }
+
+    return this._request('setStickerSetThumb', params, formData, callback);
   }
 
   sendVideo(chatId, video, optionalParams, callback) {
@@ -766,6 +843,20 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('sendContact', params, callback);
+  }
+
+  sendDice(chatId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('sendDice', params, callback);
   }
 
   sendChatAction(chatId, action, callback) {
