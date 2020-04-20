@@ -17,9 +17,9 @@ class Slimbot extends Telegram(EventEmitter) {
       let editedMessage = update.edited_message;
       let channelPost = update.channel_post;
       let editedChannelPost = update.edited_channel_post;
-      let callbackQuery = update.callback_query;
       let inlineQuery = update.inline_query;
       let chosenInlineResult = update.chosen_inline_result;
+      let callbackQuery = update.callback_query;
       let shippingQuery = update.shipping_query;
       let preCheckoutQuery = update.pre_checkout_query;
       let pollQuery = update.poll;
