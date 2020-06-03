@@ -29,7 +29,7 @@ npm i slimbot
 
 ```javascript
 const Slimbot = require('slimbot');
-const slimbot = new Slimbot(process.env['TELEGRAM_BOT_TOKEN']);
+const slimbot = new Slimbot('123456789:AA...');
 
 // Register listeners
 
@@ -42,7 +42,7 @@ slimbot.on('message', message => {
 slimbot.startPolling();
 ```
 
-Now go ahead and type a message to your bot in Telegram. It should reply you with 'Message received' in the chat.
+Now go ahead and type a message to your bot in Telegram. It should reply you with 'Message received' in the chat. Check out all other events you can listen to in the [wiki](https://github.com/edisonchee/slimbot/wiki#events).
 
 ## How it works
 
