@@ -109,6 +109,14 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('getWebhookInfo', callback);
   }
 
+  logOut(callback) {
+    return this._request('logOut', callback);
+  }
+
+  close(callback) {
+    return this._request('close', callback);
+  }
+
   sendMessage(chatId, text, optionalParams, callback) {
     let params = {
       chat_id: chatId,
