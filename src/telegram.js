@@ -929,14 +929,6 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('kickChatMember', params, callback);
   }
 
-  leaveChat(chatId, callback) {
-    let params = {
-      chat_id: chatId
-    };
-
-    return this._request('leaveChat', params, callback);
-  }
-
   unbanChatMember(chatId, userId, optionalParams, callback) {
     let params = {
       chat_id: chatId,
@@ -1089,6 +1081,14 @@ const Telegram = EventEmitter => class extends EventEmitter {
     }
 
     return this._request('unpinAllChatMessages', params, callback);
+  }
+
+  leaveChat(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    };
+
+    return this._request('leaveChat', params, callback);
   }
 
   getChat(chatId, callback) {
