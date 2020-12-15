@@ -1069,9 +1069,15 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('pinChatMessage', params, callback);
   }
 
-  unpinChatMessage(chatId, callback) {
+  unpinChatMessage(chatId, optionalParams, callback) {
     let params = {
       chat_id: chatId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
     }
 
     return this._request('unpinChatMessage', params, callback);
