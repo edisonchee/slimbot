@@ -1083,6 +1083,14 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('unpinChatMessage', params, callback);
   }
 
+  unpinAllChatMessages(chatId, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    return this._request('unpinAllChatMessages', params, callback);
+  }
+
   getChat(chatId, callback) {
     let params = {
       chat_id: chatId
