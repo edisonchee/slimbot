@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/edisonchee/slimbot.svg?branch=master)](https://travis-ci.org/edisonchee/slimbot)
+[![Build Status](hhttps://travis-ci.com/edisonchee/slimbot.svg?branch=master)](https://travis-ci.com/edisonchee/slimbot)
 [![Coverage Status](https://coveralls.io/repos/github/edisonchee/slimbot/badge.svg?branch=master)](https://coveralls.io/github/edisonchee/slimbot?branch=master)
 [![Dependency Status](https://david-dm.org/edisonchee/slimbot.svg)](https://david-dm.org/edisonchee/slimbot)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/edisonchee/slimbot/master/LICENSE)
