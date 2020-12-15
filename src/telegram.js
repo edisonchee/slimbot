@@ -98,10 +98,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
   }
 
   setWebhook(url, optionalParams, callback) {
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
     return this._request('setWebhook', url, optionalParams, callback);
   }
 
-  deleteWebhook(callback) {
+  deleteWebhook(callback, optionalParams, callback) {
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
     return this._request('deleteWebhook', callback);
   }
 
