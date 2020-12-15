@@ -318,6 +318,22 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('forwardMessage', params, callback);
   }
 
+  copyMessage(chatId, fromChatId, messageId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      from_chat_id: fromChatId,
+      message_id: messageId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('copyMessage', params, callback);
+  }
+
   sendPhoto(chatId, photo, optionalParams, callback) {
     let params;
     let formData;
