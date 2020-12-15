@@ -7,9 +7,9 @@
 
 A fuss-free, thin wrapper around Telegram Bot API for Node.js. No frills.
 
-Updated for [Telegram Bot API 4.9](https://core.telegram.org/bots/api#june-4-2020).
-Works with [Node 14.8.0](https://github.com/nodejs/node/releases/tag/v14.8.0).
-Runs on latest Node version `14.8.0`. Tested on `10.16.0` and `12.10.0` as well.
+Updated for [Telegram Bot API 5.0](https://core.telegram.org/bots/api#november-4-2020).
+Works with [Node 15.4.0](https://github.com/nodejs/node/releases/tag/v15.4.0).
+Runs on latest Node version `15.4.0`. Tested on `10.16.0` and `12.10.0` as well.
 
 _**Note:** Slimbot patch versions (e.g. x.y.**Z**) do not track or reflect Telegram Bot API changes._
 
