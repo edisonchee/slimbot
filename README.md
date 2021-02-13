@@ -65,7 +65,7 @@ const slimbot = new Slimbot(process.env['TELEGRAM_BOT_TOKEN']);
 function callback(err, obj) {
   if (err) {
     // handle error
-    console.log(obj);
+    console.log(err);
   }
   // handle returned object
   console.log(obj);
