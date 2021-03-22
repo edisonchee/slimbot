@@ -1022,6 +1022,44 @@ const Telegram = EventEmitter => class extends EventEmitter {
     return this._request('exportChatInviteLink', params, callback);
   }
 
+  createChatInviteLink(chatId, optionalParams, callback) {
+    let params = {
+      chat_id: chatId
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('createChatInviteLink', params, callback);
+  }
+
+  editChatInviteLink(chatId, inviteLink, optionalParams, callback) {
+    let params = {
+      chat_id: chatId,
+      invite_link: inviteLink
+    }
+
+    if (typeof optionalParams == 'function') {
+      callback = optionalParams;
+    } else {
+      Object.assign(params, optionalParams);
+    }
+
+    return this._request('editChatInviteLink', params, callback);
+  }
+
+  revokeChatInviteLink(chatId, inviteLink, callback) {
+    let params = {
+      chat_id: chatId,
+      invite_link: inviteLink
+    }
+
+    return this._request('revokeChatInviteLink', params, callback);
+  }
+
   setChatPhoto(chatId, photo, callback) {
     let params = {
       chat_id: chatId
