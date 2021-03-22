@@ -24,6 +24,8 @@ class Slimbot extends Telegram(EventEmitter) {
       let preCheckoutQuery = update.pre_checkout_query;
       let pollQuery = update.poll;
       let pollAnswerQuery = update.poll_answer;
+      let myChatMember = update.my_chat_member;
+      let chatMember = update.chat_member;
 
       if (message) {
         this.emit('message', message);
@@ -47,6 +49,10 @@ class Slimbot extends Telegram(EventEmitter) {
         this.emit('poll', pollQuery)
       } else if (pollAnswerQuery) {
         this.emit('poll_answer', pollAnswerQuery)
+      } else if (myChatMember) {
+        this.emit('my_chat_member', myChatMember)
+      } else if (chatMember) {
+        this.emit('chat_member', chatMember)
       }
     });
   }
